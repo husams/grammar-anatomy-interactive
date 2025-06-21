@@ -72,10 +72,17 @@ Based on the architecture document, the MVP will include:
   - [x] GET /api/v1/users/me - Get current user info
   - [x] GET /api/v1/users/ - Get all users (admin)
   - [x] GET /api/v1/users/{id} - Get specific user
-- [ ] Create modules and lessons endpoints
-  - [ ] GET /api/v1/modules - List all modules
-  - [ ] GET /api/v1/modules/{id} - Get module details
-  - [ ] GET /api/v1/lessons/{id} - Get lesson content
+- [x] Create modules and lessons endpoints
+  - [x] GET /api/v1/modules - List all modules with lesson counts
+  - [x] GET /api/v1/modules/{id} - Get module details
+  - [x] POST /api/v1/modules - Create new module (admin)
+  - [x] PUT /api/v1/modules/{id} - Update module (admin)
+  - [x] DELETE /api/v1/modules/{id} - Delete module (admin)
+  - [x] GET /api/v1/lessons - List all lessons (filterable by module)
+  - [x] GET /api/v1/lessons/{id} - Get lesson content with exercise count
+  - [x] POST /api/v1/lessons - Create new lesson (admin)
+  - [x] PUT /api/v1/lessons/{id} - Update lesson (admin)
+  - [x] DELETE /api/v1/lessons/{id} - Delete lesson (admin)
 - [ ] Set up exercises endpoints
   - [ ] GET /api/v1/exercises/{id} - Get exercise details
   - [ ] POST /api/v1/exercises/{id}/submit - Submit exercise answer
@@ -93,6 +100,12 @@ Based on the architecture document, the MVP will include:
   - [x] User login tests (success, invalid credentials, inactive user)
   - [x] User authentication tests (valid token, invalid token, no token)
   - [x] User list tests (get all users)
+- [x] Implement comprehensive modules and lessons tests
+  - [x] Module CRUD tests (create, read, update, delete)
+  - [x] Module validation tests (duplicate order, invalid ID, missing fields)
+  - [x] Lesson CRUD tests (create, read, update, delete)
+  - [x] Lesson validation tests (duplicate order, invalid module, missing fields)
+  - [x] Lesson filtering tests (by module)
 - [x] Add test coverage reporting
 - [ ] Set up CI/CD testing pipeline
 

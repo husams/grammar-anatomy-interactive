@@ -1,5 +1,7 @@
 from .user import UserCreate, UserLogin, UserResponse, UserInDB
 from .token import Token, TokenData
+from .module import ModuleCreate, ModuleUpdate, ModuleResponse, ModuleInDB
+from .lesson import LessonCreate, LessonUpdate, LessonResponse, LessonInDB
 
 __all__ = [
     "UserCreate",
@@ -7,5 +9,13 @@ __all__ = [
     "UserResponse",
     "UserInDB",
     "Token",
-    "TokenData"
+    "TokenData",
+    "ModuleCreate",
+    "ModuleUpdate",
+    "ModuleResponse",
+    "ModuleInDB",
+    "LessonCreate",
+    "LessonUpdate",
+    "LessonResponse",
+    "LessonInDB"
 ] 
