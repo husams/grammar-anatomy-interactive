@@ -1,46 +1,119 @@
-# Getting Started with Create React App
+# Grammar Anatomy Interactive
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An interactive learning application for mastering English grammar based on "Brehe's Grammar Anatomy" textbook.
 
-## Available Scripts
+## Project Status
 
-In the project directory, you can run:
+**Current Phase:** 1.1 - Project Initialization ✅
 
-### `npm start`
+### Completed Tasks
+- [x] React TypeScript project created
+- [x] Tailwind CSS v3.x installed and configured
+- [x] React Router v6 set up
+- [x] Basic project structure created
+- [x] TypeScript types defined
+- [x] Basic routing implemented
+- [x] Development server running
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Project Structure
+```
+src/
+├── components/     # Reusable UI components
+├── pages/         # Route-level page components
+├── contexts/      # React Context for state management
+├── data/          # Static data and API integration
+├── types/         # TypeScript type definitions
+├── App.tsx        # Main application component
+└── index.tsx      # Application entry point
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+### Prerequisites
+- Node.js 16+ 
+- npm or yarn
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Installation
+```bash
+npm install
+```
 
-### `npm run build`
+### Development
+```bash
+npm start
+```
+Runs the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Available Scripts
+- `npm start` - Start development server
+- `npm test` - Run tests
+- `npm run build` - Build for production
+- `npm run eject` - Eject from Create React App
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Technology Stack
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Frontend
+- **React 18** - UI framework
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Styling
+- **React Router v6** - Navigation
 
-### `npm run eject`
+### Planned Backend
+- Node.js + Express OR Python + FastAPI
+- PostgreSQL OR MongoDB
+- JWT authentication
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## MVP Roadmap
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Phase 1: Foundation ✅
+- [x] Project setup and configuration
+- [ ] Development environment setup
+- [ ] Backend foundation
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Phase 2: Core Infrastructure
+- [ ] Database schema implementation
+- [ ] Basic API endpoints
+- [ ] Frontend foundation components
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Phase 3: Content Management
+- [ ] Content structure setup
+- [ ] Content API integration
+- [ ] Static content pages
 
-## Learn More
+### Phase 4: Core Learning Features
+- [ ] Dashboard implementation
+- [ ] Exercise system
+- [ ] Progress tracking
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Phase 5: Interactive Tools
+- [ ] Basic Anatomy Lab
+- [ ] Glossary implementation
+- [ ] Review system
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Phase 6: Polish & Testing
+- [ ] UI/UX refinement
+- [ ] Testing & quality assurance
+- [ ] Performance optimization
+
+## Features
+
+### MVP Features
+- User registration and login
+- Module and lesson navigation
+- Interactive exercises
+- Progress tracking
+- Basic sentence parsing
+- Searchable glossary
+- Flashcard review system
+
+### Future Features (Phase 2+)
+- AI Guru chatbot
+- Text-to-Speech integration
+- Advanced sentence diagramming
+- Cloud sync
+- Admin panel
+- Advanced analytics
+
+## Contributing
+
+This project follows the MVP implementation plan outlined in the docs directory. Please refer to the architecture and design documents for development guidelines.
