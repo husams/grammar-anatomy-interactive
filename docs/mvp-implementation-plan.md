@@ -14,7 +14,7 @@ Based on the architecture document, the MVP will include:
 
 ## Current Status Summary
 - ✅ **Phase 1**: Project Setup & Foundation (COMPLETED)
-- 🔄 **Phase 2**: Core Infrastructure (IN PROGRESS - 2.1 COMPLETED)
+- ✅ **Phase 2**: Core Infrastructure (COMPLETED)
 - ⏳ **Phase 3-6**: Content Management, Core Features, Interactive Tools, Polish & Testing (PENDING)
 
 ---
@@ -45,7 +45,7 @@ Based on the architecture document, the MVP will include:
 
 ---
 
-## Phase 2: Core Infrastructure (Week 2) 🔄 IN PROGRESS
+## Phase 2: Core Infrastructure (Week 2) ✅ COMPLETED
 
 ### 2.1 Database Schema Implementation ✅ COMPLETED
 - [x] Set up Alembic configuration (alembic.ini)
@@ -83,9 +83,13 @@ Based on the architecture document, the MVP will include:
   - [x] POST /api/v1/lessons - Create new lesson (admin)
   - [x] PUT /api/v1/lessons/{id} - Update lesson (admin)
   - [x] DELETE /api/v1/lessons/{id} - Delete lesson (admin)
-- [ ] Set up exercises endpoints
-  - [ ] GET /api/v1/exercises/{id} - Get exercise details
-  - [ ] POST /api/v1/exercises/{id}/submit - Submit exercise answer
+- [x] Set up exercises endpoints
+  - [x] GET /api/v1/exercises - List all exercises (filterable by lesson)
+  - [x] GET /api/v1/exercises/{id} - Get exercise details
+  - [x] POST /api/v1/exercises - Create new exercise (admin)
+  - [x] PUT /api/v1/exercises/{id} - Update exercise (admin)
+  - [x] DELETE /api/v1/exercises/{id} - Delete exercise (admin)
+  - [x] POST /api/v1/exercises/{id}/submit - Submit exercise answer
 - [ ] Implement progress tracking endpoints
   - [ ] GET /api/v1/users/progress - Get user progress
   - [ ] POST /api/v1/progress/update - Update progress
@@ -106,6 +110,11 @@ Based on the architecture document, the MVP will include:
   - [x] Lesson CRUD tests (create, read, update, delete)
   - [x] Lesson validation tests (duplicate order, invalid module, missing fields)
   - [x] Lesson filtering tests (by module)
+- [x] Implement comprehensive exercises tests
+  - [x] Exercise CRUD tests (create, read, update, delete)
+  - [x] Exercise validation tests (invalid content, duplicate order, invalid lesson)
+  - [x] Exercise submission tests (correct/incorrect answers, invalid format)
+  - [x] Exercise type tests (multiple choice, identification, fill-in-blank, sentence construction)
 - [x] Add test coverage reporting
 - [ ] Set up CI/CD testing pipeline
 

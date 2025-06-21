@@ -2,6 +2,10 @@ from .user import UserCreate, UserLogin, UserResponse, UserInDB
 from .token import Token, TokenData
 from .module import ModuleCreate, ModuleUpdate, ModuleResponse, ModuleInDB
 from .lesson import LessonCreate, LessonUpdate, LessonResponse, LessonInDB
+from .exercise import (
+    ExerciseCreate, ExerciseUpdate, ExerciseResponse, ExerciseInDB,
+    ExerciseSubmission, ExerciseResult, ExerciseType
+)
 
 __all__ = [
     "UserCreate",
@@ -17,5 +21,12 @@ __all__ = [
     "LessonCreate",
     "LessonUpdate",
     "LessonResponse",
-    "LessonInDB"
+    "LessonInDB",
+    "ExerciseCreate",
+    "ExerciseUpdate",
+    "ExerciseResponse",
+    "ExerciseInDB",
+    "ExerciseSubmission",
+    "ExerciseResult",
+    "ExerciseType"
 ] 
