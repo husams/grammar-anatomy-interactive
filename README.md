@@ -17,32 +17,58 @@ An interactive learning application for mastering English grammar based on "Breh
 
 ### Project Structure
 ```
-src/
-├── components/     # Reusable UI components
-├── pages/         # Route-level page components
-├── contexts/      # React Context for state management
-├── data/          # Static data and API integration
-├── types/         # TypeScript type definitions
-├── App.tsx        # Main application component
-└── index.tsx      # Application entry point
+grammar-anatomy-app/          # Frontend (React + TypeScript)
+├── src/
+│   ├── components/     # Reusable UI components
+│   ├── pages/         # Route-level page components
+│   ├── contexts/      # React Context for state management
+│   ├── data/          # Static data and API integration
+│   ├── types/         # TypeScript type definitions
+│   ├── App.tsx        # Main application component
+│   └── index.tsx      # Application entry point
+└── docs/              # Project documentation
+
+backend/                # Backend (Python + FastAPI) - Coming in Phase 1.3
+├── app/               # FastAPI application
+├── alembic/           # Database migrations
+├── tests/             # Test files
+└── requirements.txt   # Python dependencies
 ```
 
 ## Getting Started
 
 ### Prerequisites
-- Node.js 16+ 
+- Node.js 16+ (for frontend)
+- Python 3.8+ (for backend - coming in Phase 1.3)
 - npm or yarn
 
-### Installation
+### Frontend Development
 ```bash
-npm install
-```
+# Navigate to frontend directory
+cd grammar-anatomy-app
 
-### Development
-```bash
+# Install dependencies
+npm install
+
+# Start development server
 npm start
 ```
-Runs the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+### Backend Development (Phase 1.3)
+```bash
+# Navigate to backend directory (when created)
+cd backend
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Start development server
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
 
 ### Available Scripts
 - `npm start` - Start development server
@@ -58,21 +84,24 @@ Runs the app in development mode. Open [http://localhost:3000](http://localhost:
 - **Tailwind CSS** - Styling
 - **React Router v6** - Navigation
 
-### Planned Backend
-- Node.js + Express OR Python + FastAPI
-- PostgreSQL OR MongoDB
-- JWT authentication
+### Backend (Phase 1.3)
+- **Python 3.8+** - Programming language
+- **FastAPI** - Web framework
+- **SQLAlchemy** - ORM
+- **Alembic** - Database migrations
+- **PostgreSQL/SQLite** - Database
+- **JWT** - Authentication
 
 ## MVP Roadmap
 
 ### Phase 1: Foundation ✅
 - [x] Project setup and configuration
 - [ ] Development environment setup
-- [ ] Backend foundation
+- [ ] Backend foundation (Python FastAPI)
 
 ### Phase 2: Core Infrastructure
-- [ ] Database schema implementation
-- [ ] Basic API endpoints
+- [ ] Database schema implementation (SQLAlchemy)
+- [ ] Basic API endpoints (FastAPI)
 - [ ] Frontend foundation components
 
 ### Phase 3: Content Management
@@ -114,6 +143,24 @@ Runs the app in development mode. Open [http://localhost:3000](http://localhost:
 - Admin panel
 - Advanced analytics
 
+## Documentation
+
+- [Architecture Overview](docs/architecture.md)
+- [MVP Implementation Plan](docs/mvp-implementation-plan.md)
+- [Python Backend Setup Guide](docs/python-backend-setup.md)
+- [API Specification](docs/api-spec.md)
+- [Database Schema](docs/database-schema.md)
+- [Frontend Structure](docs/frontend-structure.md)
+- [Content Management](docs/content-management.md)
+- [UI Wireframes](docs/ui-wireframes.md)
+
 ## Contributing
 
 This project follows the MVP implementation plan outlined in the docs directory. Please refer to the architecture and design documents for development guidelines.
+
+## Repository
+
+- **GitHub:** https://github.com/husams/grammar-anatomy-interactive
+- **Frontend:** React TypeScript application
+- **Backend:** Python FastAPI application (Phase 1.3)
+- **Documentation:** Comprehensive guides and specifications
