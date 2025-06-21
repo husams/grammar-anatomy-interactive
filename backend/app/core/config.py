@@ -1,9 +1,11 @@
 from typing import List, Union
-from pydantic import AnyHttpUrl, validator
+from pydantic import AnyHttpUrl, field_validator, ConfigDict
 from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
+    model_config = ConfigDict(case_sensitive=True, env_file=".env")
+    
     API_V1_STR: str = "/api/v1"
     PROJECT_NAME: str = "Grammar Anatomy API"
     
@@ -15,7 +17,8 @@ class Settings(BaseSettings):
         "http://127.0.0.1:3001",
     ]
 
-    @validator("BACKEND_CORS_ORIGINS", pre=True)
+    @field_validator("BACKEND_CORS_ORIGINS", mode="before")
+    @classmethod
     def assemble_cors_origins(cls, v: Union[str, List[str]]) -> Union[List[str], str]:
         if isinstance(v, str) and not v.startswith("["):
             return [i.strip() for i in v.split(",")]
@@ -34,10 +37,6 @@ class Settings(BaseSettings):
     # Environment
     ENVIRONMENT: str = "development"
     DEBUG: bool = True
-
-    class Config:
-        case_sensitive = True
-        env_file = ".env"
 
 
 settings = Settings() 

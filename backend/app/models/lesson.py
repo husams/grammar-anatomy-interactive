@@ -18,4 +18,5 @@ class Lesson(Base):
     
     # Relationships
     module = relationship("Module", back_populates="lessons")
-    exercises = relationship("Exercise", back_populates="lesson") 
+    exercises = relationship("Exercise", back_populates="lesson")
+    progress = relationship("Progress", back_populates="lesson") 

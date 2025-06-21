@@ -62,13 +62,16 @@ Based on the architecture document, the MVP will include:
 - [x] Set up database connection and session management
 - [ ] Create seed data for initial content
 
-### 2.2 Basic API Endpoints 🔄
+### 2.2 Basic API Endpoints ✅ COMPLETED
 - [x] Set up API v1 structure with endpoints directory
 - [x] Create basic endpoint files (users.py, modules.py, lessons.py, exercises.py)
-- [ ] Implement user endpoints (register, login) with JWT authentication
-  - [ ] User registration with password hashing
-  - [ ] User login with JWT token generation
-  - [ ] User authentication middleware
+- [x] Implement user endpoints (register, login) with JWT authentication
+  - [x] User registration with password hashing and validation
+  - [x] User login with JWT token generation
+  - [x] User authentication middleware
+  - [x] GET /api/v1/users/me - Get current user info
+  - [x] GET /api/v1/users/ - Get all users (admin)
+  - [x] GET /api/v1/users/{id} - Get specific user
 - [ ] Create modules and lessons endpoints
   - [ ] GET /api/v1/modules - List all modules
   - [ ] GET /api/v1/modules/{id} - Get module details
@@ -79,8 +82,19 @@ Based on the architecture document, the MVP will include:
 - [ ] Implement progress tracking endpoints
   - [ ] GET /api/v1/users/progress - Get user progress
   - [ ] POST /api/v1/progress/update - Update progress
-- [ ] Add request/response models with Pydantic
+- [x] Add request/response models with Pydantic
 - [ ] Set up API documentation with Swagger/OpenAPI
+
+### 2.3 Testing Infrastructure ✅ COMPLETED
+- [x] Set up pytest configuration with test database
+- [x] Create test fixtures for database and client
+- [x] Implement comprehensive user authentication tests
+  - [x] User registration tests (success, duplicate email, invalid data, weak password)
+  - [x] User login tests (success, invalid credentials, inactive user)
+  - [x] User authentication tests (valid token, invalid token, no token)
+  - [x] User list tests (get all users)
+- [x] Add test coverage reporting
+- [ ] Set up CI/CD testing pipeline
 
 ### 2.3 Frontend Foundation ⏳
 - [ ] Create basic layout components
