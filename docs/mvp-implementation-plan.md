@@ -14,7 +14,7 @@ Based on the architecture document, the MVP will include:
 
 ## Current Status Summary
 - ✅ **Phase 1**: Project Setup & Foundation (COMPLETED)
-- 🔄 **Phase 2**: Core Infrastructure (IN PROGRESS)
+- 🔄 **Phase 2**: Core Infrastructure (IN PROGRESS - 2.1 COMPLETED)
 - ⏳ **Phase 3-6**: Content Management, Core Features, Interactive Tools, Polish & Testing (PENDING)
 
 ---
@@ -47,19 +47,20 @@ Based on the architecture document, the MVP will include:
 
 ## Phase 2: Core Infrastructure (Week 2) 🔄 IN PROGRESS
 
-### 2.1 Database Schema Implementation 🔄
+### 2.1 Database Schema Implementation ✅ COMPLETED
 - [x] Set up Alembic configuration (alembic.ini)
-- [ ] Create database models using SQLAlchemy ORM
-  - [ ] User model (id, email, password_hash, name, created_at)
-  - [ ] Module model (id, title, order, created_at)
-  - [ ] Lesson model (id, module_id, title, content, order)
-  - [ ] Exercise model (id, lesson_id, type, prompt, answer, options)
-  - [ ] Progress model (id, user_id, module_id, lesson_id, status, updated_at)
-  - [ ] Achievement model (id, user_id, type, earned_at)
-  - [ ] Glossary model (term, definition, related_lessons)
-- [ ] Implement database migrations with Alembic
+- [x] Create database models using SQLAlchemy ORM
+  - [x] User model (id, email, password_hash, name, created_at)
+  - [x] Module model (id, title, order, created_at)
+  - [x] Lesson model (id, module_id, title, content, order)
+  - [x] Exercise model (id, lesson_id, type, prompt, answer, options)
+  - [x] Progress model (id, user_id, module_id, lesson_id, status, updated_at)
+  - [x] Achievement model (id, user_id, type, earned_at)
+  - [x] Glossary model (term, definition, related_lessons)
+  - [x] ChatHistory model (id, user_id, question, answer, timestamp)
+- [x] Implement database migrations with Alembic
+- [x] Set up database connection and session management
 - [ ] Create seed data for initial content
-- [ ] Set up database connection and session management
 
 ### 2.2 Basic API Endpoints 🔄
 - [x] Set up API v1 structure with endpoints directory
