@@ -237,39 +237,76 @@ POST /api/anatomy-lab/parse
 
 ### Backend Project Structure
 ```
-backend/
-├── app/
-│   ├── __init__.py
-│   ├── main.py              # FastAPI application
-│   ├── config.py            # Configuration settings
-│   ├── database.py          # Database connection
-│   ├── models/              # SQLAlchemy models
+grammar-anatomy-app/
+├── frontend/              # React TypeScript application
+│   ├── src/
+│   │   ├── components/   # Reusable UI components
+│   │   ├── pages/        # Route-level page components
+│   │   ├── contexts/     # React Context for state management
+│   │   ├── data/         # Static data and API integration
+│   │   ├── types/        # TypeScript type definitions
+│   │   ├── App.tsx       # Main application component
+│   │   └── index.tsx     # Application entry point
+│   ├── public/           # Static assets
+│   ├── package.json      # Frontend dependencies
+│   └── tailwind.config.js # Tailwind CSS configuration
+├── backend/              # Python FastAPI application
+│   ├── app/
 │   │   ├── __init__.py
-│   │   ├── user.py
-│   │   ├── module.py
-│   │   ├── lesson.py
-│   │   └── exercise.py
-│   ├── schemas/             # Pydantic schemas
+│   │   ├── main.py              # FastAPI application entry point
+│   │   ├── config.py            # Configuration settings
+│   │   ├── database.py          # Database connection and session
+│   │   ├── models/              # SQLAlchemy database models
+│   │   │   ├── __init__.py
+│   │   │   ├── user.py
+│   │   │   ├── module.py
+│   │   │   ├── lesson.py
+│   │   │   ├── exercise.py
+│   │   │   ├── progress.py
+│   │   │   ├── achievement.py
+│   │   │   └── glossary.py
+│   │   ├── schemas/             # Pydantic request/response models
+│   │   │   ├── __init__.py
+│   │   │   ├── user.py
+│   │   │   ├── module.py
+│   │   │   ├── lesson.py
+│   │   │   └── exercise.py
+│   │   ├── api/                 # API route handlers
+│   │   │   ├── __init__.py
+│   │   │   ├── deps.py          # Dependencies (auth, etc.)
+│   │   │   ├── users.py
+│   │   │   ├── modules.py
+│   │   │   ├── lessons.py
+│   │   │   ├── exercises.py
+│   │   │   ├── glossary.py
+│   │   │   └── anatomy_lab.py
+│   │   ├── core/                # Core functionality
+│   │   │   ├── __init__.py
+│   │   │   ├── auth.py          # JWT authentication
+│   │   │   ├── security.py      # Password hashing
+│   │   │   └── config.py        # Settings management
+│   │   └── utils/               # Utility functions
+│   │       ├── __init__.py
+│   │       └── content.py       # Content loading utilities
+│   ├── alembic/                 # Database migrations
+│   │   ├── versions/
+│   │   ├── env.py
+│   │   └── alembic.ini
+│   ├── tests/                   # Test files
 │   │   ├── __init__.py
-│   │   ├── user.py
-│   │   ├── module.py
-│   │   └── exercise.py
-│   ├── api/                 # API routes
-│   │   ├── __init__.py
-│   │   ├── users.py
-│   │   ├── modules.py
-│   │   └── exercises.py
-│   ├── core/                # Core functionality
-│   │   ├── __init__.py
-│   │   ├── auth.py
-│   │   └── security.py
-│   └── utils/               # Utility functions
-│       ├── __init__.py
-│       └── content.py
-├── alembic/                 # Database migrations
-├── tests/                   # Test files
-├── requirements.txt         # Python dependencies
-└── .env                     # Environment variables
+│   │   ├── test_api/
+│   │   ├── test_models/
+│   │   └── conftest.py
+│   ├── requirements.txt         # Python dependencies
+│   ├── requirements-dev.txt     # Development dependencies
+│   ├── .env                     # Environment variables
+│   ├── .env.example             # Example environment variables
+│   └── README.md                # Backend documentation
+└── docs/                        # Project documentation
+    ├── architecture.md
+    ├── mvp-implementation-plan.md
+    ├── python-backend-setup.md
+    └── ...
 ```
 
 ---

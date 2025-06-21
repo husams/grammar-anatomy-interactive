@@ -3,39 +3,48 @@
 ## Directory Layout
 
 ```text
-src/
-  components/
-    Sidebar.tsx
-    Navigation.tsx
-    ProgressBar.tsx
-    SkillChart.tsx
-    AchievementBadge.tsx
-    Flashcard.tsx
-    SentenceDiagram.tsx
-    AudioButton.tsx
-    ...
-  pages/
-    Dashboard.tsx
-    Modules.tsx
-    Module.tsx
-    LessonPage.tsx
-    ExercisePage.tsx
-    AnatomyLab.tsx
-    AIGuru.tsx
-    Glossary.tsx
-    Review.tsx
-  contexts/
-    ProgressContext.tsx
-    UserContext.tsx
-    ChatContext.tsx
-  data/
-    modules.ts
-    lessons.ts
-    glossary.ts
-  types/
-    index.ts
-  App.tsx
-  main.tsx
+grammar-anatomy-app/
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Sidebar.tsx
+│   │   │   ├── Navigation.tsx
+│   │   │   ├── ProgressBar.tsx
+│   │   │   ├── SkillChart.tsx
+│   │   │   ├── AchievementBadge.tsx
+│   │   │   ├── Flashcard.tsx
+│   │   │   ├── SentenceDiagram.tsx
+│   │   │   ├── AudioButton.tsx
+│   │   │   └── ...
+│   │   ├── pages/
+│   │   │   ├── Dashboard.tsx
+│   │   │   ├── Modules.tsx
+│   │   │   ├── Module.tsx
+│   │   │   ├── LessonPage.tsx
+│   │   │   ├── ExercisePage.tsx
+│   │   │   ├── AnatomyLab.tsx
+│   │   │   ├── AIGuru.tsx
+│   │   │   ├── Glossary.tsx
+│   │   │   └── Review.tsx
+│   │   ├── contexts/
+│   │   │   ├── ProgressContext.tsx
+│   │   │   ├── UserContext.tsx
+│   │   │   └── ChatContext.tsx
+│   │   ├── data/
+│   │   │   ├── modules.ts
+│   │   │   ├── lessons.ts
+│   │   │   └── glossary.ts
+│   │   ├── types/
+│   │   │   └── index.ts
+│   │   ├── App.tsx
+│   │   └── index.tsx
+│   ├── public/
+│   ├── package.json
+│   ├── tailwind.config.js
+│   ├── tsconfig.json
+│   └── README.md
+└── docs/
+    └── ...
 ```
 
 ## Main Components & Pages
