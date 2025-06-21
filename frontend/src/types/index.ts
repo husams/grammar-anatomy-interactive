@@ -27,7 +27,11 @@ export interface Lesson {
 export interface Exercise {
   id: string;
   lessonId: string;
-  type: 'identification' | 'multiple_choice' | 'fill_blank' | 'sentence_construction';
+  type:
+    | 'identification'
+    | 'multiple_choice'
+    | 'fill_blank'
+    | 'sentence_construction';
   prompt: string;
   answer: string;
   options?: string[];
@@ -80,4 +84,4 @@ export interface ExerciseResult {
   result: 'correct' | 'incorrect';
   timestamp: Date;
   feedback?: string;
-} 
+}

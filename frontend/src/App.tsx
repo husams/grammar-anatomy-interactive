@@ -24,15 +24,32 @@ function App() {
                 Grammar Anatomy Interactive
               </h1>
               <nav className="space-x-4">
-                <a href="/" className="text-gray-600 hover:text-gray-900">Dashboard</a>
-                <a href="/modules" className="text-gray-600 hover:text-gray-900">Modules</a>
-                <a href="/anatomy-lab" className="text-gray-600 hover:text-gray-900">Anatomy Lab</a>
-                <a href="/glossary" className="text-gray-600 hover:text-gray-900">Glossary</a>
+                <a href="/" className="text-gray-600 hover:text-gray-900">
+                  Dashboard
+                </a>
+                <a
+                  href="/modules"
+                  className="text-gray-600 hover:text-gray-900"
+                >
+                  Modules
+                </a>
+                <a
+                  href="/anatomy-lab"
+                  className="text-gray-600 hover:text-gray-900"
+                >
+                  Anatomy Lab
+                </a>
+                <a
+                  href="/glossary"
+                  className="text-gray-600 hover:text-gray-900"
+                >
+                  Glossary
+                </a>
               </nav>
             </div>
           </div>
         </header>
-        
+
         <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
           <Routes>
             <Route path="/" element={<Dashboard />} />
