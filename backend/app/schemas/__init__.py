@@ -6,6 +6,10 @@ from .exercise import (
     ExerciseCreate, ExerciseUpdate, ExerciseResponse, ExerciseInDB,
     ExerciseSubmission, ExerciseResult, ExerciseType
 )
+from .progress import (
+    ProgressCreate, ProgressUpdate, ProgressResponse, ProgressStatus,
+    UserProgressSummary, ModuleProgressDetail
+)
 
 __all__ = [
     "UserCreate",
@@ -28,5 +32,11 @@ __all__ = [
     "ExerciseInDB",
     "ExerciseSubmission",
     "ExerciseResult",
-    "ExerciseType"
+    "ExerciseType",
+    "ProgressCreate",
+    "ProgressUpdate",
+    "ProgressResponse",
+    "ProgressStatus",
+    "UserProgressSummary",
+    "ModuleProgressDetail"
 ] 
