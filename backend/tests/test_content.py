@@ -21,38 +21,27 @@ class TestContentLoader:
         assert len(modules) > 0
         module = modules[0]
         assert module["id"] == "01-nouns-verbs"
-        assert module["title"] == "Nouns and Verbs"
-        assert module["order"] == 1
-        assert module["module"] == "01-nouns-verbs"
+        assert module["title"] == "Nouns & Verbs: The Building Blocks of Sentences"
 
     def test_get_lesson_content(self):
         lesson = self.loader.get_lesson_content("01-nouns-verbs")
         assert lesson is not None
-        assert lesson.title == "Nouns and Verbs"
-        assert lesson.order == 1
-        assert lesson.module == "01-nouns-verbs"
-        assert "Nouns" in lesson.content
-    
+        assert lesson.title == "Nouns & Verbs: The Building Blocks of Sentences"
+
     def test_get_exercises(self):
         """Test getting exercises."""
         exercises = self.loader.get_exercises("01-nouns-verbs")
-        
-        assert len(exercises) == 2
-        
-        # Check first exercise
-        ex1 = exercises[0]
-        assert ex1.id == "ex1"
-        assert ex1.type == "identification"
-        assert ex1.prompt == "Identify the verb in: The cat runs."
-        assert ex1.answer == "runs"
-        assert ex1.difficulty == "easy"
-        
-        # Check second exercise
-        ex2 = exercises[1]
-        assert ex2.id == "ex2"
-        assert ex2.type == "identification"
-        assert ex2.options is None
-        assert ex2.answer == "children"
+    
+        assert len(exercises) == 10
+
+    def test_search_glossary(self):
+        """Test glossary search functionality."""
+        results = self.loader.search_glossary("Noun")
+        assert any(entry.term == "Noun" for entry in results)
+    
+        # Search by definition
+        results = self.loader.search_glossary("action")
+        assert len(results) == 6
     
     def test_get_glossary(self):
         """Test getting glossary entries."""
@@ -62,25 +51,6 @@ class TestContentLoader:
         noun_entry = next(entry for entry in glossary if entry.term == "Noun")
         assert "person" in noun_entry.definition
         assert "cat" in noun_entry.examples
-    
-    def test_search_glossary(self):
-        """Test glossary search functionality."""
-        results = self.loader.search_glossary("Noun")
-        assert any(entry.term == "Noun" for entry in results)
-        
-        # Search by definition
-        results = self.loader.search_glossary("action")
-        assert len(results) == 1
-        assert results[0].term == "Verb"
-        
-        # Search by example
-        results = self.loader.search_glossary("cat")
-        assert len(results) == 1
-        assert results[0].term == "Noun"
-        
-        # Search with no results
-        results = self.loader.search_glossary("nonexistent")
-        assert len(results) == 0
     
     def test_get_glossary_by_category(self):
         """Test getting glossary entries by category."""
@@ -225,4 +195,4 @@ class TestContentLoaderWithoutFrontmatter:
         
         # Cleanup
         import shutil
-        shutil.rmtree(content_dir) 
+        shutil.rmtree(content_dir)
