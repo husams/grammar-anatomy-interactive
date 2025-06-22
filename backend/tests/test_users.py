@@ -40,11 +40,23 @@ class TestUserRegistration:
         assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
     
     def test_register_weak_password(self, client, test_user_data):
-        """Test registration with weak password."""
-        test_user_data["password"] = "123"
-        response = client.post("/api/v1/users/register", json=test_user_data)
-        assert response.status_code == status.HTTP_400_BAD_REQUEST
-        assert "Password must be at least 8 characters long" in response.json()["detail"]
+        """Test registration with weak password (less than 8 characters)."""
+        invalid_user_data = test_user_data.copy()
+        invalid_user_data["password"] = "123" # Too short
+        response = client.post("/api/v1/users/register", json=invalid_user_data)
+        assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
+
+        # Check for Pydantic's validation error structure
+        error_details = response.json().get("detail", [])
+        assert isinstance(error_details, list)
+        assert len(error_details) > 0
+        password_error_found = False
+        for error in error_details:
+            # Adjusted to be more flexible with the exact wording of "msg"
+            if error.get("loc") == ["body", "password"] and "at least 8 characters" in error.get("msg", "").lower():
+                password_error_found = True
+                break
+        assert password_error_found, f"Pydantic validation error for password min_length not found or incorrect. Actual details: {error_details}"
 
 
 class TestUserLogin:
