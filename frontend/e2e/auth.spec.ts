@@ -20,21 +20,13 @@ test.describe('Authentication E2E', () => {
     await page.fill('input[name="password"]', 'TestPass123!');
     await page.fill('input[name="confirmPassword"]', 'TestPass123!');
     await page.click('button:has-text("Register")');
-    await expect(page.getByText(/registration successful! you can now log in\./i)).toBeVisible();
 
-    // Go back to login
-    await page.click('text=back to login');
-    await expect(page.getByRole('heading', { name: /login/i })).toBeVisible();
-
-    // Login with the new user
-    await page.fill('input[name="email"]', email);
-    await page.fill('input[name="password"]', 'TestPass123!');
-    await page.click('button:has-text("Login")');
-    // Wait for login success (alert or dashboard)
-    await page.waitForEvent('dialog').then(dialog => dialog.accept());
+    // After successful registration the user should be redirected to the dashboard
+    await expect(page).toHaveURL('/dashboard');
+    await expect(page.getByText(/dashboard - coming soon/i)).toBeVisible();
 
     // Request password reset
-    await page.click('text=forgot password');
+    await page.goto('/reset-password');
     await expect(page.getByRole('heading', { name: /reset password/i })).toBeVisible();
     await page.fill('input[name="email"]', 'test@example.com');
     await page.click('button:has-text("Send Reset Link")');
@@ -50,7 +42,7 @@ test.describe('Authentication E2E', () => {
     await page.fill('input[name="password"]', 'TestPass123!');
     await page.fill('input[name="confirmPassword"]', 'TestPass123!');
     await page.click('button:has-text("Register")');
-    await expect(page.getByText(/registration successful! you can now log in./i)).toBeVisible();
+    await expect(page).toHaveURL('/dashboard');
 
     // Now, try to register again with the same email.
     await page.goto('/register');

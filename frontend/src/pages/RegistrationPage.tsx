@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface RegistrationForm {
   name: string;
@@ -12,7 +12,7 @@ const RegistrationPage: React.FC = () => {
   const [form, setForm] = useState<RegistrationForm>({ name: '', email: '', password: '', confirmPassword: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -21,7 +21,6 @@ const RegistrationPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    setSuccess(false);
     if (form.password !== form.confirmPassword) {
       setError('Passwords do not match');
       return;
@@ -39,8 +38,21 @@ const RegistrationPage: React.FC = () => {
         setLoading(false);
         return;
       }
+      // Automatically log in after successful registration
+      const loginRes = await fetch('/api/v1/users/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: form.email, password: form.password }),
+      });
+
       setLoading(false);
-      setSuccess(true);
+      if (loginRes.ok) {
+        alert('Registration successful!');
+        navigate('/dashboard');
+      } else {
+        // Fallback: show generic message if auto login fails
+        navigate('/login');
+      }
     } catch (err) {
       setError('Network error');
       setLoading(false);
@@ -101,7 +113,6 @@ const RegistrationPage: React.FC = () => {
             />
           </div>
           {error && <div className="text-red-600 dark:text-red-400 text-sm">{error}</div>}
-          {success && <div className="text-green-600 dark:text-green-400 text-sm">Registration successful! You can now log in.</div>}
           <button
             type="submit"
             disabled={loading}
