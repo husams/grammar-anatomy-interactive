@@ -25,6 +25,10 @@ const RegistrationPage: React.FC = () => {
       setError('Passwords do not match');
       return;
     }
+    if (form.password.length < 8) {
+      setError('Password must be at least 8 characters long');
+      return;
+    }
     setLoading(true);
     try {
       const res = await fetch('/api/v1/users/register', {
@@ -34,7 +38,7 @@ const RegistrationPage: React.FC = () => {
       });
       if (!res.ok) {
         const data = await res.json();
-        setError(data.error || 'Registration failed');
+        setError(data.detail || 'Registration failed');
         setLoading(false);
         return;
       }

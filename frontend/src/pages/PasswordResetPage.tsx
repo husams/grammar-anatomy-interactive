@@ -13,14 +13,14 @@ const PasswordResetPage: React.FC = () => {
     setSuccess(false);
     setLoading(true);
     try {
-      const res = await fetch('/api/v1/auth/forgot-password', {
+      const res = await fetch('/api/v1/users/forgot-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
       });
       if (!res.ok) {
         const data = await res.json();
-        setError(data.error || 'Password reset failed');
+        setError(data.detail || 'Password reset failed');
         setLoading(false);
         return;
       }
@@ -50,7 +50,7 @@ const PasswordResetPage: React.FC = () => {
             />
           </div>
           {error && <div className="text-red-600 dark:text-red-400 text-sm">{error}</div>}
-          {success && <div className="text-green-600 dark:text-green-400 text-sm">If your email is registered, you will receive a password reset link.</div>}
+          {success && <div className="text-green-600 dark:text-green-400 text-sm">You will receive a password reset link.</div>}
           <button
             type="submit"
             disabled={loading}

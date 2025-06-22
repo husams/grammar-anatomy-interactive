@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
+from pydantic import BaseModel
 from app.db.base import get_db
 from app.models.user import User
 from app.schemas.user import UserCreate, UserLogin, UserResponse
@@ -8,6 +9,10 @@ from app.core.security import get_password_hash, verify_password, create_access_
 from app.api.deps import get_current_active_user
 
 router = APIRouter()
+
+
+class ForgotPasswordRequest(BaseModel):
+    email: str
 
 
 @router.get("/", response_model=list[UserResponse])
@@ -87,6 +92,20 @@ def login(user_credentials: UserLogin, db: Session = Depends(get_db)):
 def get_current_user_info(current_user: User = Depends(get_current_active_user)):
     """Get current user information."""
     return current_user
+
+
+@router.post("/forgot-password")
+def forgot_password(request: ForgotPasswordRequest, db: Session = Depends(get_db)):
+    """Request password reset for a user."""
+    # Check if user exists
+    user = db.query(User).filter(User.email == request.email).first()
+    if not user:
+        # Don't reveal if email exists or not for security
+        return {"message": "If your email is registered, you will receive a password reset link."}
+    
+    # TODO: Implement actual password reset logic
+    # For now, just return a success message
+    return {"message": "If your email is registered, you will receive a password reset link."}
 
 
 @router.get("/{user_id}", response_model=UserResponse)
