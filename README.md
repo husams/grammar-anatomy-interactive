@@ -56,6 +56,106 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
 The backend API will be available at [http://localhost:8000](http://localhost:8000)
 
+## Development Setup
+
+### Frontend
+1. Navigate to the frontend directory:
+   ```bash
+   cd frontend
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm start
+   ```
+   The app will be available at [http://localhost:3000](http://localhost:3000)
+
+### Backend
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
+2. Create and activate a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Start the development server:
+   ```bash
+   uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+   ```
+   The API will be available at [http://localhost:8000](http://localhost:8000)
+
+## Running Tests
+
+### Frontend
+- **Unit & Integration Tests:**
+  ```bash
+  cd frontend
+  npm test
+  ```
+  This runs the React test suite (Jest, React Testing Library). Results are shown in the terminal.
+
+- **End-to-End (E2E) Tests:**
+  See the [End-to-End (E2E) Testing](#end-to-end-e2e-testing) section below for detailed instructions.
+
+### Backend
+- **Unit & API Tests:**
+  ```bash
+  cd backend
+  pytest
+  ```
+  Test results are shown in the terminal. Coverage and advanced reporting can be configured in `backend/tests/`.
+
+## End-to-End (E2E) Testing
+
+End-to-End (E2E) tests for the frontend are implemented using [Playwright](https://playwright.dev/). These tests simulate real user interactions in a browser and verify the full application flow.
+
+> **Note:** The backend API server must be running for E2E tests to work, as tests interact with real authentication endpoints (registration, login, etc.).
+>
+> **Limitation:** Password reset functionality is not yet implemented in the backend. Any E2E test steps involving password reset will fail until this feature is added.
+
+### How to Run E2E Tests
+
+1. **Start the frontend development server** (in a separate terminal, if not already running):
+   ```bash
+   cd frontend
+   npm start
+   ```
+   The app must be running at [http://localhost:3000](http://localhost:3000) for E2E tests to work.
+
+2. **Run E2E tests with Playwright:**
+   ```bash
+   cd frontend
+   npx playwright test
+   ```
+   This will execute all E2E tests in `frontend/e2e/`. Results and reports are saved in `frontend/playwright-report/` and `frontend/test-results/`.
+
+3. **View the Playwright HTML report:**
+   ```bash
+   npx playwright show-report frontend/playwright-report
+   ```
+   This will open an interactive HTML report in your browser, showing detailed results for each E2E test.
+
+#### NPM Scripts for E2E
+- Run E2E tests:
+  ```bash
+  npm run test:e2e
+  ```
+- Start the dev server and run E2E tests automatically:
+  ```bash
+  npm run test:e2e:full
+  ```
+
+> For more details, see the Playwright documentation or the `frontend/e2e/` directory for test examples.
+
 ## Technology Stack
 
 ### Frontend

@@ -15,8 +15,8 @@ Allows users to complete interactive grammar exercises, receive feedback, and tr
 ```mermaid
 flowchart TD
     User["User"] -->|"Selects Exercise"| ExercisePage["Exercise Page"]
-    ExercisePage -->|"Fetches Exercise"| ExerciseAPI["GET /api/v1/exercises/{exercise_id}"]
-    ExercisePage -->|"Submits Answer"| SubmitAPI["POST /api/v1/exercises/{exercise_id}/submit"]
+    ExercisePage -->|"Fetches Exercise"| ExerciseAPI["GET /exercises/{exercise_id}"]
+    ExercisePage -->|"Submits Answer"| SubmitAPI["POST /exercises/{exercise_id}/submit"]
     SubmitAPI -->|"Returns Feedback"| ExercisePage
 ```
 
@@ -25,8 +25,8 @@ flowchart TD
 - From dashboard (review mode)
 
 ## API Endpoints Used
-- `GET /api/v1/exercises/{exercise_id}`
-- `POST /api/v1/exercises/{exercise_id}/submit`
+- `GET /exercises/{exercise_id}`
+- `POST /exercises/{exercise_id}/submit`
 
 ## Acceptance Criteria
 - [ ] User can complete various exercise types

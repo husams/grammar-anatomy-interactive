@@ -25,10 +25,10 @@ flowchart TD
 - Links from dashboard
 
 ## API Endpoints Used
-- `GET /api/v1/modules`
-- `GET /api/v1/modules/{module_id}`
-- `GET /api/v1/lessons/{lesson_id}`
-- `GET /api/v1/exercises/{exercise_id}`
+- `GET /modules`
+- `GET /modules/{module_id}`
+- `GET /lessons/{lesson_id}`
+- `GET /exercises/{exercise_id}`
 
 ## Acceptance Criteria
 - [ ] User can see a list of all modules

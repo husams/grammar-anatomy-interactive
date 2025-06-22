@@ -1,0 +1,87 @@
+[
+  {
+    "id": "ex1",
+    "type": "identification",
+    "prompt": "Identify the action verb in the sentence: Pearl painted Mr. Morton's porch.",
+    "answer": "painted",
+    "explanation": "The word 'painted' is the action verb because it shows what Pearl did.",
+    "difficulty": "easy"
+  },
+  {
+    "id": "ex2",
+    "type": "identification",
+    "prompt": "Identify the subject (noun) in the sentence: The children played in the park.",
+    "answer": "children",
+    "explanation": "The word 'children' is the subject because it tells us who performed the action.",
+    "difficulty": "easy"
+  },
+  {
+    "id": "ex3",
+    "type": "multiple_choice",
+    "prompt": "What type of noun is 'happiness' in the sentence: Happiness is contagious?",
+    "options": ["Common noun", "Proper noun", "Concrete noun", "Abstract noun"],
+    "answer": "Abstract noun",
+    "explanation": "Happiness is an abstract noun because it represents an idea or feeling that cannot be physically touched.",
+    "difficulty": "medium"
+  },
+  {
+    "id": "ex4",
+    "type": "multiple_choice",
+    "prompt": "What type of verb is 'is' in the sentence: The sky is blue?",
+    "options": ["Action verb", "Linking verb", "Helping verb", "Transitive verb"],
+    "answer": "Linking verb",
+    "explanation": "The word 'is' is a linking verb because it connects the subject 'sky' to the description 'blue'.",
+    "difficulty": "medium"
+  },
+  {
+    "id": "ex5",
+    "type": "fill_in_blank",
+    "prompt": "Complete the sentence with an appropriate noun: The _____ chased the mouse.",
+    "answer": "cat",
+    "explanation": "Any animal that could chase a mouse would work, but 'cat' is the most common answer.",
+    "difficulty": "easy",
+    "acceptable_answers": ["cat", "dog", "fox", "owl"]
+  },
+  {
+    "id": "ex6",
+    "type": "fill_in_blank",
+    "prompt": "Complete the sentence with an appropriate verb: The bird _____ in the tree.",
+    "answer": "sang",
+    "explanation": "Any action a bird might do would work, but 'sang' is a common bird action.",
+    "difficulty": "easy",
+    "acceptable_answers": ["sang", "sat", "flew", "nested", "perched"]
+  },
+  {
+    "id": "ex7",
+    "type": "sentence_construction",
+    "prompt": "Arrange these words to form a complete sentence: [students, study, books, the]",
+    "answer": "The students study books.",
+    "explanation": "This follows the basic sentence structure: Subject (The students) + Verb (study) + Object (books).",
+    "difficulty": "medium"
+  },
+  {
+    "id": "ex8",
+    "type": "identification",
+    "prompt": "Identify all the nouns in the sentence: The teacher explained grammar to the students.",
+    "answer": "teacher, grammar, students",
+    "explanation": "The nouns are 'teacher' (subject), 'grammar' (object), and 'students' (object of preposition).",
+    "difficulty": "medium"
+  },
+  {
+    "id": "ex9",
+    "type": "identification",
+    "prompt": "Identify the verb in the sentence: My family owned a cocker spaniel when I was young.",
+    "answer": "owned",
+    "explanation": "The word 'owned' is the main verb showing what the family did.",
+    "difficulty": "easy"
+  },
+  {
+    "id": "ex10",
+    "type": "multiple_choice",
+    "prompt": "Which word is a proper noun in the sentence: John visited Paris last summer?",
+    "options": ["John", "visited", "Paris", "summer"],
+    "answer": "John",
+    "explanation": "Both 'John' and 'Paris' are proper nouns, but 'John' is a person's name.",
+    "difficulty": "easy"
+  }
+] 

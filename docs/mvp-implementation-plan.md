@@ -3,7 +3,7 @@
 This file tracks the implementation status of all core MVP features for both the frontend and backend. Update this file as you complete each feature. Sync with documentation and project board regularly.
 
 ## 1. Authentication
-- [ ] Login page (frontend)
+- [x] Login page (frontend)
 - [ ] Registration page (frontend)
 - [ ] Password reset flow (frontend)
 - [ ] API integration for authentication (frontend)

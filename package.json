@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "react-markdown": "^10.1.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.53.1",
+    "jest-junit": "^16.0.0",
+    "playwright": "^1.53.1",
+    "start-server-and-test": "^2.0.12"
+  }
+}

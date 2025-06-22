@@ -1,6 +1,9 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
+import LoginPage from './pages/LoginPage';
+import RegistrationPage from './pages/RegistrationPage';
+import PasswordResetPage from './pages/PasswordResetPage';
 
 // Placeholder components - will be implemented in Phase 2
 const Dashboard = () => <div className="p-8">Dashboard - Coming Soon</div>;
@@ -14,37 +17,42 @@ const Glossary = () => <div className="p-8">Glossary - Coming Soon</div>;
 const Review = () => <div className="p-8">Review - Coming Soon</div>;
 
 function App() {
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem('darkMode') === 'true';
+  });
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    localStorage.setItem('darkMode', darkMode ? 'true' : 'false');
+  }, [darkMode]);
+
   return (
     <Router>
-      <div className="min-h-screen bg-gray-50">
-        <header className="bg-white shadow-sm border-b">
+      <div className={"min-h-screen bg-gray-50 dark:bg-gray-900"}>
+        <header className="bg-white dark:bg-gray-800 shadow-sm border-b dark:border-gray-700">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center py-4">
-              <h1 className="text-2xl font-bold text-gray-900">
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                 Grammar Anatomy Interactive
               </h1>
               <nav className="space-x-4">
-                <a href="/" className="text-gray-600 hover:text-gray-900">
-                  Dashboard
+                <a href="/login" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                  Login
                 </a>
-                <a
-                  href="/modules"
-                  className="text-gray-600 hover:text-gray-900"
+                <a href="/register" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                  Register
+                </a>
+                <button
+                  onClick={() => setDarkMode((d) => !d)}
+                  className="ml-4 px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-600 transition"
+                  aria-label="Toggle dark mode"
                 >
-                  Modules
-                </a>
-                <a
-                  href="/anatomy-lab"
-                  className="text-gray-600 hover:text-gray-900"
-                >
-                  Anatomy Lab
-                </a>
-                <a
-                  href="/glossary"
-                  className="text-gray-600 hover:text-gray-900"
-                >
-                  Glossary
-                </a>
+                  {darkMode ? 'Light Mode' : 'Dark Mode'}
+                </button>
               </nav>
             </div>
           </div>
@@ -52,7 +60,10 @@ function App() {
 
         <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegistrationPage />} />
+            <Route path="/reset-password" element={<PasswordResetPage />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/modules" element={<Modules />} />
             <Route path="/modules/:id" element={<Module />} />
             <Route path="/lessons/:id" element={<Lesson />} />
@@ -61,6 +72,7 @@ function App() {
             <Route path="/ai-guru" element={<AIGuru />} />
             <Route path="/glossary" element={<Glossary />} />
             <Route path="/review" element={<Review />} />
+            <Route path="*" element={<Navigate to="/login" replace />} />
           </Routes>
         </main>
       </div>

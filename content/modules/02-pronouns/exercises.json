@@ -1,0 +1,86 @@
+[
+  {
+    "id": "ex1",
+    "type": "identification",
+    "prompt": "Identify the personal pronoun in the sentence: She loves to read books.",
+    "answer": "She",
+    "explanation": "The word 'She' is a personal pronoun that replaces a female person's name.",
+    "difficulty": "easy"
+  },
+  {
+    "id": "ex2",
+    "type": "multiple_choice",
+    "prompt": "What type of pronoun is 'this' in the sentence: This is my favorite movie?",
+    "options": ["Personal pronoun", "Possessive pronoun", "Demonstrative pronoun", "Interrogative pronoun"],
+    "answer": "Demonstrative pronoun",
+    "explanation": "The word 'this' is a demonstrative pronoun because it points to a specific thing.",
+    "difficulty": "medium"
+  },
+  {
+    "id": "ex3",
+    "type": "fill_in_blank",
+    "prompt": "Complete the sentence with the correct object pronoun: Give the book to _____.",
+    "answer": "me",
+    "explanation": "The object pronoun 'me' is used after the preposition 'to'.",
+    "difficulty": "easy"
+  },
+  {
+    "id": "ex4",
+    "type": "multiple_choice",
+    "prompt": "Which pronoun correctly completes the sentence: Each student should bring _____ book to class?",
+    "options": ["their", "his", "her", "his or her"],
+    "answer": "his or her",
+    "explanation": "Since 'each student' is singular, we need a singular pronoun. 'His or her' is the most inclusive option.",
+    "difficulty": "hard"
+  },
+  {
+    "id": "ex5",
+    "type": "identification",
+    "prompt": "Identify the reflexive pronoun in the sentence: I hurt myself while playing soccer.",
+    "answer": "myself",
+    "explanation": "The word 'myself' is a reflexive pronoun that refers back to the subject 'I'.",
+    "difficulty": "medium"
+  },
+  {
+    "id": "ex6",
+    "type": "multiple_choice",
+    "prompt": "What type of pronoun is 'who' in the sentence: Who is coming to the party?",
+    "options": ["Personal pronoun", "Demonstrative pronoun", "Interrogative pronoun", "Relative pronoun"],
+    "answer": "Interrogative pronoun",
+    "explanation": "The word 'who' is an interrogative pronoun because it's used to ask a question.",
+    "difficulty": "medium"
+  },
+  {
+    "id": "ex7",
+    "type": "fill_in_blank",
+    "prompt": "Complete the sentence with a possessive pronoun: The red car is _____.",
+    "answer": "mine",
+    "explanation": "The possessive pronoun 'mine' shows ownership of the car.",
+    "difficulty": "easy"
+  },
+  {
+    "id": "ex8",
+    "type": "identification",
+    "prompt": "Identify the relative pronoun in the sentence: The person who called is my friend.",
+    "answer": "who",
+    "explanation": "The word 'who' is a relative pronoun that connects the two clauses and refers to 'person'.",
+    "difficulty": "medium"
+  },
+  {
+    "id": "ex9",
+    "type": "multiple_choice",
+    "prompt": "Which indefinite pronoun correctly completes the sentence: _____ knows the answer to this question?",
+    "options": ["Everyone", "Many", "Both", "Several"],
+    "answer": "Everyone",
+    "explanation": "The singular indefinite pronoun 'Everyone' is needed because the verb 'knows' is singular.",
+    "difficulty": "medium"
+  },
+  {
+    "id": "ex10",
+    "type": "sentence_construction",
+    "prompt": "Rewrite this sentence using pronouns to avoid repetition: John went to the store. John bought milk. John paid for the milk.",
+    "answer": "John went to the store. He bought milk. He paid for it.",
+    "explanation": "Using 'He' and 'it' as pronouns makes the sentence more concise and natural.",
+    "difficulty": "medium"
+  }
+] 

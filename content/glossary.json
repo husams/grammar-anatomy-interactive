@@ -1,0 +1,149 @@
+[
+  {
+    "term": "Noun",
+    "definition": "A word that names a person, place, thing, or idea. Nouns can function as subjects, objects, or complements in sentences.",
+    "examples": ["cat", "teacher", "happiness", "New York"],
+    "related_lessons": ["01-nouns-verbs"],
+    "category": "Parts of Speech"
+  },
+  {
+    "term": "Verb",
+    "definition": "A word that expresses an action, occurrence, or state of being. Verbs tell us what the subject is doing or what is happening.",
+    "examples": ["run", "is", "think", "become"],
+    "related_lessons": ["01-nouns-verbs"],
+    "category": "Parts of Speech"
+  },
+  {
+    "term": "Pronoun",
+    "definition": "A word that takes the place of a noun or noun phrase. Pronouns help avoid repetition and make writing more fluid.",
+    "examples": ["he", "she", "it", "they", "this", "that"],
+    "related_lessons": ["02-pronouns"],
+    "category": "Parts of Speech"
+  },
+  {
+    "term": "Adjective",
+    "definition": "A word that modifies or describes a noun or pronoun. Adjectives provide more information about the person, place, thing, or idea.",
+    "examples": ["red", "tall", "beautiful", "quick"],
+    "related_lessons": ["03-adjectives"],
+    "category": "Parts of Speech"
+  },
+  {
+    "term": "Adverb",
+    "definition": "A word that modifies a verb, adjective, or another adverb. Adverbs tell how, when, where, or to what extent something happens.",
+    "examples": ["quickly", "very", "here", "yesterday"],
+    "related_lessons": ["04-adverbs"],
+    "category": "Parts of Speech"
+  },
+  {
+    "term": "Preposition",
+    "definition": "A word that shows the relationship between a noun or pronoun and other words in a sentence. Prepositions often indicate location, time, or direction.",
+    "examples": ["in", "on", "at", "by", "for", "with"],
+    "related_lessons": ["05-prepositions"],
+    "category": "Parts of Speech"
+  },
+  {
+    "term": "Conjunction",
+    "definition": "A word that connects words, phrases, or clauses. Conjunctions help join ideas and show relationships between them.",
+    "examples": ["and", "but", "or", "because", "although"],
+    "related_lessons": ["06-conjunctions"],
+    "category": "Parts of Speech"
+  },
+  {
+    "term": "Subject",
+    "definition": "The part of a sentence that performs the action or is being described. The subject is usually a noun or pronoun.",
+    "examples": ["The cat", "She", "Students", "Happiness"],
+    "related_lessons": ["01-nouns-verbs"],
+    "category": "Sentence Structure"
+  },
+  {
+    "term": "Predicate",
+    "definition": "The part of a sentence that contains the verb and tells something about the subject. The predicate includes the verb and all its modifiers.",
+    "examples": ["runs fast", "is beautiful", "studied for the test"],
+    "related_lessons": ["01-nouns-verbs"],
+    "category": "Sentence Structure"
+  },
+  {
+    "term": "Object",
+    "definition": "A noun or pronoun that receives the action of a verb or is affected by it. Objects can be direct or indirect.",
+    "examples": ["the ball", "him", "the book"],
+    "related_lessons": ["01-nouns-verbs", "02-pronouns"],
+    "category": "Sentence Structure"
+  },
+  {
+    "term": "Clause",
+    "definition": "A group of words that contains a subject and a verb. Clauses can be independent (complete sentences) or dependent (incomplete thoughts).",
+    "examples": ["I went to the store", "when I was young", "because it was raining"],
+    "related_lessons": ["06-conjunctions"],
+    "category": "Sentence Structure"
+  },
+  {
+    "term": "Phrase",
+    "definition": "A group of words that work together but do not contain both a subject and a verb. Phrases function as single parts of speech.",
+    "examples": ["in the morning", "the red car", "running quickly"],
+    "related_lessons": ["03-adjectives", "04-adverbs", "05-prepositions"],
+    "category": "Sentence Structure"
+  },
+  {
+    "term": "Antecedent",
+    "definition": "The noun or noun phrase that a pronoun refers to or replaces. The antecedent usually comes before the pronoun.",
+    "examples": ["John (antecedent) - he (pronoun)", "the book (antecedent) - it (pronoun)"],
+    "related_lessons": ["02-pronouns"],
+    "category": "Grammar Concepts"
+  },
+  {
+    "term": "Agreement",
+    "definition": "The grammatical relationship between words that ensures they match in number, person, and gender.",
+    "examples": ["The cat is (singular)", "The cats are (plural)"],
+    "related_lessons": ["01-nouns-verbs", "02-pronouns"],
+    "category": "Grammar Concepts"
+  },
+  {
+    "term": "Tense",
+    "definition": "The form of a verb that indicates when an action takes place - past, present, or future.",
+    "examples": ["walked (past)", "walk (present)", "will walk (future)"],
+    "related_lessons": ["01-nouns-verbs"],
+    "category": "Grammar Concepts"
+  },
+  {
+    "term": "Voice",
+    "definition": "The form of a verb that indicates whether the subject performs the action (active voice) or receives the action (passive voice).",
+    "examples": ["The cat chased the mouse (active)", "The mouse was chased by the cat (passive)"],
+    "related_lessons": ["01-nouns-verbs"],
+    "category": "Grammar Concepts"
+  },
+  {
+    "term": "Mood",
+    "definition": "The form of a verb that indicates the speaker's attitude toward the action - indicative (fact), imperative (command), or subjunctive (wish/hypothesis).",
+    "examples": ["I am happy (indicative)", "Be quiet (imperative)", "If I were rich (subjunctive)"],
+    "related_lessons": ["01-nouns-verbs"],
+    "category": "Grammar Concepts"
+  },
+  {
+    "term": "Modifier",
+    "definition": "A word, phrase, or clause that provides additional information about another word or group of words.",
+    "examples": ["red car (adjective modifier)", "run quickly (adverb modifier)"],
+    "related_lessons": ["03-adjectives", "04-adverbs"],
+    "category": "Grammar Concepts"
+  },
+  {
+    "term": "Complement",
+    "definition": "A word or group of words that completes the meaning of a subject, verb, or object.",
+    "examples": ["The sky is blue (subject complement)", "I consider him smart (object complement)"],
+    "related_lessons": ["01-nouns-verbs", "03-adjectives"],
+    "category": "Grammar Concepts"
+  },
+  {
+    "term": "Fragment",
+    "definition": "An incomplete sentence that is missing either a subject, a verb, or a complete thought.",
+    "examples": ["Running in the park", "The red car", "Because it was raining"],
+    "related_lessons": ["01-nouns-verbs", "06-conjunctions"],
+    "category": "Common Errors"
+  },
+  {
+    "term": "Run-on Sentence",
+    "definition": "A sentence that contains two or more independent clauses that are not properly joined or separated.",
+    "examples": ["I went to the store I bought milk", "She loves pizza he prefers pasta"],
+    "related_lessons": ["06-conjunctions"],
+    "category": "Common Errors"
+  }
+] 

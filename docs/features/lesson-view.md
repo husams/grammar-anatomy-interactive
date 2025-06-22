@@ -15,7 +15,7 @@ Allows users to view and interact with lesson content, including text, examples,
 ```mermaid
 flowchart TD
     User["User"] -->|"Selects Lesson"| LessonPage["Lesson Page"]
-    LessonPage -->|"Displays Content"| ContentAPI["GET /api/v1/lessons/{lesson_id}"]
+    LessonPage -->|"Displays Content"| ContentAPI["GET /lessons/{lesson_id}"]
     LessonPage -->|"Interacts with Example"| ExamplePopup["Show Explanation"]
 ```
 
@@ -24,7 +24,7 @@ flowchart TD
 - From dashboard (continue lesson)
 
 ## API Endpoints Used
-- `GET /api/v1/lessons/{lesson_id}`
+- `GET /lessons/{lesson_id}`
 
 ## Acceptance Criteria
 - [ ] User can view lesson content

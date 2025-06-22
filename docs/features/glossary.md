@@ -15,7 +15,7 @@ Allows users to search and view definitions of grammar terms, with links to rele
 ```mermaid
 flowchart TD
     User["User"] -->|"Opens Glossary"| GlossaryPage["Glossary Page"]
-    GlossaryPage -->|"Searches Term"| GlossaryAPI["GET /api/v1/glossary?query=term"]
+    GlossaryPage -->|"Searches Term"| GlossaryAPI["GET /content/glossary?query=term"]
     LessonPage["Lesson Page"] -->|"Taps Term"| GlossaryPopup["Show Definition"]
 ```
 
@@ -24,7 +24,9 @@ flowchart TD
 - Tapping a term in lesson content
 
 ## API Endpoints Used
-- `GET /api/v1/glossary`
+- `GET /content/glossary`
+- `GET /content/glossary?query=term`
+- `GET /content/glossary/{term}`
 
 ## Acceptance Criteria
 - [ ] User can search for terms

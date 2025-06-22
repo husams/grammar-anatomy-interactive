@@ -2,6 +2,7 @@
   "name": "grammar-anatomy-app",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8000",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -22,14 +23,17 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll=false --reporters=default --reporters=jest-junit",
     "eject": "react-scripts eject",
     "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
     "lint:fix": "eslint src --ext .ts,.tsx,.js,.jsx --fix",
     "format": "prettier --write src/**/*.{ts,tsx,js,jsx,css,md,json}",
     "format:check": "prettier --check src/**/*.{ts,tsx,js,jsx,css,md,json}",
     "type-check": "tsc --noEmit",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test:e2e": "playwright test",
+    "test:e2e:full": "start-server-and-test start http://localhost:3000 test:e2e",
+    "test:all": "npm run test && npm run test:e2e:full"
   },
   "eslintConfig": {
     "extends": [
@@ -51,6 +55,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
+    "@playwright/test": "^1.53.1",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "autoprefixer": "^10.4.21",
@@ -60,7 +65,9 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "husky": "^9.1.7",
+    "jest-junit": "^16.0.0",
     "lint-staged": "^16.1.2",
+    "playwright": "^1.53.1",
     "postcss": "^8.5.6",
     "prettier": "^3.5.3",
     "tailwindcss": "^3.4.17"
@@ -73,5 +80,9 @@
     "src/**/*.{css,md,json}": [
       "prettier --write"
     ]
+  },
+  "jest-junit": {
+    "outputDirectory": "./",
+    "outputName": "junit.xml"
   }
 }
