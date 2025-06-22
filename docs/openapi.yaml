@@ -1,0 +1,711 @@
+∑openapi: 3.0.3
+info:
+  title: Grammar Anatomy Interactive API
+  version: 1.0.0
+  description: |
+    REST API for Grammar Anatomy Interactive, an adaptive grammar learning platform. This spec covers user management, authentication, modules, lessons, exercises, progress tracking, and content/glossary endpoints. See requirements.md for full product vision.
+servers:
+  - url: /api/v1
+security:
+  - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Token:
+      type: object
+      properties:
+        access_token:
+          type: string
+        token_type:
+          type: string
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+        name:
+          type: string
+        is_active:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+    ModuleResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        order:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        lesson_count:
+          type: integer
+    LessonResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        module_id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        content:
+          type: string
+        order:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        exercise_count:
+          type: integer
+    ExerciseType:
+      type: string
+      enum: [identification, multiple_choice, fill_in_blank, sentence_construction]
+    ExerciseResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        lesson_id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        type:
+          $ref: '#/components/schemas/ExerciseType'
+        prompt:
+          type: string
+        content:
+          type: object
+        order:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+    ExerciseSubmission:
+      type: object
+      properties:
+        answer:
+          type: object
+        time_spent:
+          type: integer
+          description: Time in seconds
+    ExerciseResult:
+      type: object
+      properties:
+        exercise_id:
+          type: string
+          format: uuid
+        user_id:
+          type: string
+          format: uuid
+        answer:
+          type: object
+        is_correct:
+          type: boolean
+        score:
+          type: number
+        time_spent:
+          type: integer
+        submitted_at:
+          type: string
+          format: date-time
+    ProgressStatus:
+      type: string
+      enum: [not_started, in_progress, completed]
+    ProgressResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        user_id:
+          type: string
+          format: uuid
+        module_id:
+          type: string
+          format: uuid
+        lesson_id:
+          type: string
+          format: uuid
+        status:
+          $ref: '#/components/schemas/ProgressStatus'
+        completed_exercises:
+          type: integer
+        total_exercises:
+          type: integer
+        updated_at:
+          type: string
+          format: date-time
+    UserProgressSummary:
+      type: object
+      properties:
+        total_modules:
+          type: integer
+        completed_modules:
+          type: integer
+        total_lessons:
+          type: integer
+        completed_lessons:
+          type: integer
+        total_exercises:
+          type: integer
+        completed_exercises:
+          type: integer
+        overall_progress_percentage:
+          type: number
+        module_progress:
+          type: array
+          items:
+            type: object
+            # TODO: Define ModuleProgressDetail schema
+paths:
+  /users/register:
+    post:
+      tags: [Users]
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              # TODO: Define UserCreate schema
+              type: object
+      responses:
+        '201':
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: Email already registered or invalid password
+  /users/login:
+    post:
+      tags: [Users]
+      summary: Login and get JWT token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              # TODO: Define UserLogin schema
+              type: object
+      responses:
+        '200':
+          description: JWT token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '401':
+          description: Invalid credentials
+  /users/me:
+    get:
+      tags: [Users]
+      summary: Get current user info
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Current user info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+  /modules:
+    get:
+      tags: [Modules]
+      summary: List all modules
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of modules
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ModuleResponse'
+    post:
+      tags: [Modules]
+      summary: Create a new module
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              # TODO: Define ModuleCreate schema
+              type: object
+      responses:
+        '201':
+          description: Module created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModuleResponse'
+  /modules/{module_id}:
+    get:
+      tags: [Modules]
+      summary: Get module by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: module_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Module details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModuleResponse'
+        '404':
+          description: Module not found
+  /lessons:
+    get:
+      tags: [Lessons]
+      summary: List all lessons
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: module_id
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of lessons
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LessonResponse'
+    post:
+      tags: [Lessons]
+      summary: Create a new lesson
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              # TODO: Define LessonCreate schema
+              type: object
+      responses:
+        '201':
+          description: Lesson created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LessonResponse'
+  /lessons/{lesson_id}:
+    get:
+      tags: [Lessons]
+      summary: Get lesson by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: lesson_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Lesson details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LessonResponse'
+        '404':
+          description: Lesson not found
+  /exercises:
+    get:
+      tags: [Exercises]
+      summary: List all exercises
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: lesson_id
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of exercises
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExerciseResponse'
+    post:
+      tags: [Exercises]
+      summary: Create a new exercise
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              # TODO: Define ExerciseCreate schema
+              type: object
+      responses:
+        '201':
+          description: Exercise created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExerciseResponse'
+  /exercises/{exercise_id}:
+    get:
+      tags: [Exercises]
+      summary: Get exercise by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: exercise_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Exercise details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExerciseResponse'
+        '404':
+          description: Exercise not found
+    put:
+      tags: [Exercises]
+      summary: Update an exercise
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              # TODO: Define ExerciseUpdate schema
+              type: object
+      responses:
+        '200':
+          description: Exercise updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExerciseResponse'
+    delete:
+      tags: [Exercises]
+      summary: Delete an exercise
+      security:
+        - bearerAuth: []
+      responses:
+        '204':
+          description: Exercise deleted
+        '404':
+          description: Exercise not found
+  /exercises/{exercise_id}/submit:
+    post:
+      tags: [Exercises]
+      summary: Submit an answer for an exercise
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExerciseSubmission'
+      responses:
+        '200':
+          description: Submission result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExerciseResult'
+  /progress:
+    get:
+      tags: [Progress]
+      summary: Get user progress
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: module_id
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: lesson_id
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of progress entries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProgressResponse'
+    post:
+      tags: [Progress]
+      summary: Create a new progress entry
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              # TODO: Define ProgressCreate schema
+              type: object
+      responses:
+        '201':
+          description: Progress entry created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProgressResponse'
+  /progress/{progress_id}:
+    get:
+      tags: [Progress]
+      summary: Get progress entry by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: progress_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Progress entry details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProgressResponse'
+        '404':
+          description: Progress entry not found
+  /progress/update:
+    post:
+      tags: [Progress]
+      summary: Update or create user progress
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              # TODO: Define ProgressUpdate schema
+              type: object
+      responses:
+        '200':
+          description: Progress updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProgressResponse'
+  /content/modules:
+    get:
+      tags: [Content]
+      summary: List all content modules (static content)
+      responses:
+        '200':
+          description: List of content modules
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+  /content/modules/{module_id}:
+    get:
+      tags: [Content]
+      summary: Get content module by ID (static content)
+      parameters:
+        - name: module_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Content module details
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Module not found
+  /content/modules/{module_id}/lesson:
+    get:
+      tags: [Content]
+      summary: Get lesson content for a module (static content)
+      parameters:
+        - name: module_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Lesson content
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Lesson not found
+  /content/modules/{module_id}/exercises:
+    get:
+      tags: [Content]
+      summary: Get exercises for a module (static content)
+      parameters:
+        - name: module_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of exercises
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+  /content/exercises/{exercise_id}:
+    get:
+      tags: [Content]
+      summary: Get a specific exercise by ID (static content)
+      parameters:
+        - name: module_id
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: exercise_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Exercise details
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Exercise not found
+  /content/glossary:
+    get:
+      tags: [Content]
+      summary: Get glossary entries
+      parameters:
+        - name: query
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: category
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of glossary entries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+  /content/glossary/{term}:
+    get:
+      tags: [Content]
+      summary: Get a specific glossary term
+      parameters:
+        - name: term
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Glossary term details
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Glossary term not found
+  /content/glossary/categories:
+    get:
+      tags: [Content]
+      summary: Get all glossary categories
+      responses:
+        '200':
+          description: List of glossary categories
+          content:
+            application/json:
+              schema:
+                type: object
+  /content/validate:
+    get:
+      tags: [Content]
+      summary: Validate all content files
+      responses:
+        '200':
+          description: Content validation result
+          content:
+            application/json:
+              schema:
+                type: object
+  /content/clear-cache:
+    post:
+      tags: [Content]
+      summary: Clear the content cache
+      responses:
+        '200':
+          description: Cache cleared
+          content:
+            application/json:
+              schema:
+                type: object 
