@@ -13,10 +13,12 @@ This directory contains all design, planning, and technical documentation for th
 - `api-use-cases.md` — Example API usage scenarios and flows
 - `python-backend-setup.md` — Backend setup, environment, and development instructions
 - `ui-wireframes.md` — Visual wireframes and flowcharts for key UI screens
+- `requirements.md` — Main requirements and specification document
 
 ## Document Groups
 
 ### 1. Architecture & Planning
+- **`requirements.md`**: Main requirements/specification document (vision, features, audience, UI/UX, technical)
 - **`architecture.md`**: High-level system design, technology stack, and component overview
 - **`mvp-implementation-plan.md`**: Phased implementation plan for the MVP, with checklists and progress tracking
 
