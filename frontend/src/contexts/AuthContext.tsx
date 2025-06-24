@@ -67,21 +67,41 @@ const tokenStorage = {
 
 // API utilities
 const apiCall = async (endpoint: string, options: RequestInit = {}) => {
-  const response = await fetch(`/api/v1${endpoint}`, {
-    headers: {
-      'Content-Type': 'application/json',
-      ...options.headers,
-    },
-    ...options,
-  });
+  const url = `http://localhost:8000/api/v1${endpoint}`;
+  console.log('🔥 Making API call to:', url);
+  console.log('🔥 Options:', JSON.stringify(options, null, 2));
+  
+  try {
+    const response = await fetch(url, {
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        ...options.headers,
+      },
+      ...options,
+    });
 
-  const data = await response.json();
-  
-  if (!response.ok) {
-    throw new Error(data.detail || `HTTP ${response.status}: ${response.statusText}`);
+    console.log('🔥 Response status:', response.status);
+    console.log('🔥 Response ok:', response.ok);
+    console.log('🔥 Response type:', response.type);
+
+    const data = await response.json();
+    console.log('🔥 Response data:', data);
+    
+    if (!response.ok) {
+      throw new Error(data.detail || `HTTP ${response.status}: ${response.statusText}`);
+    }
+    
+    return data;
+  } catch (error) {
+    console.error('🔥 API call error:', error);
+    console.error('🔥 Error type:', typeof error);
+    if (error instanceof Error) {
+      console.error('🔥 Error message:', error.message);
+      console.error('🔥 Error stack:', error.stack);
+    }
+    throw error;
   }
-  
-  return data;
 };
 
 const fetchCurrentUser = async (token: string): Promise<User> => {

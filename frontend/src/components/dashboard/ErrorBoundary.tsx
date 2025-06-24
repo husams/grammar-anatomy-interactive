@@ -34,7 +34,7 @@ const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ error, onRetry }) => {
           </h3>
           
           <p className="text-gray-600 dark:text-gray-400 mb-6">
-            We couldn't load your dashboard data. This might be due to a network issue or server problem.
+            We couldn&apos;t load your dashboard data. This might be due to a network issue or server problem.
           </p>
 
           {/* Error Details */}

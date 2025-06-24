@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     PROJECT_NAME: str = "Grammar Anatomy API"
     
     # CORS
-    BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = [
+    BACKEND_CORS_ORIGINS: List[str] = [
         "http://localhost:3000",
         "http://localhost:3001",
         "http://127.0.0.1:3000",

@@ -9,7 +9,7 @@ import ErrorBoundary from '../components/dashboard/ErrorBoundary';
 
 // API utility function following existing pattern from AuthContext
 const apiCall = async (endpoint: string, token: string) => {
-  const response = await fetch(`/api/v1${endpoint}`, {
+  const response = await fetch(`http://localhost:8000/api/v1${endpoint}`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
@@ -43,7 +43,7 @@ const DashboardPage: React.FC = () => {
       // Fetch progress summary and modules in parallel
       const [progressSummary, modules] = await Promise.all([
         apiCall('/progress/summary', token) as Promise<UserProgressSummary>,
-        apiCall('/modules', token) as Promise<Module[]>,
+        apiCall('/modules/', token) as Promise<Module[]>,
       ]);
 
       setDashboardState({
