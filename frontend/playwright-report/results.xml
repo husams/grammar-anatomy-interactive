@@ -1,10 +1,32 @@
-<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="2.0992740000000003">
-<testsuite name="auth.spec.ts" timestamp="2025-06-24T17:28:39.960Z" hostname="chromium" tests="3" failures="0" skipped="0" time="1.749" errors="0">
-<testcase name="Authentication E2E › User can register, login, and request password reset (real backend)" classname="auth.spec.ts" time="0.84">
+<testsuites id="" name="" tests="7" failures="0" skipped="7" errors="0" time="0.05169">
+<testsuite name="dashboard-basic.spec.ts" timestamp="2025-06-24T18:39:07.259Z" hostname="chromium" tests="7" failures="0" skipped="7" time="0" errors="0">
+<testcase name="Dashboard Feature Tests › should load dashboard successfully" classname="dashboard-basic.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Authentication E2E › User sees an error when trying to register with an existing email" classname="auth.spec.ts" time="0.73">
+<testcase name="Dashboard Feature Tests › should display progress information" classname="dashboard-basic.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
-<testcase name="Authentication E2E › User sees an error when trying to register with an invalid password" classname="auth.spec.ts" time="0.179">
+<testcase name="Dashboard Feature Tests › should navigate with continue learning button" classname="dashboard-basic.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard Feature Tests › should support keyboard navigation" classname="dashboard-basic.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard Feature Tests › should be mobile responsive" classname="dashboard-basic.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard Feature Tests › should have proper accessibility attributes" classname="dashboard-basic.spec.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Dashboard Feature Tests › should handle quick actions navigation" classname="dashboard-basic.spec.ts" time="0">
+<skipped>
+</skipped>
 </testcase>
 </testsuite>
 </testsuites>

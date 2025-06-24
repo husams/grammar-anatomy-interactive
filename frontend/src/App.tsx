@@ -7,9 +7,9 @@ import Header from './components/Header';
 import LoginPage from './pages/LoginPage';
 import RegistrationPage from './pages/RegistrationPage';
 import PasswordResetPage from './pages/PasswordResetPage';
+import DashboardPage from './pages/DashboardPage';
 
-// Placeholder components - will be implemented in Phase 2
-const Dashboard = () => <div className="p-8">Dashboard - Coming Soon</div>;
+// Placeholder components - will be implemented in future phases
 const Modules = () => <div className="p-8">Modules - Coming Soon</div>;
 const Module = () => <div className="p-8">Module Detail - Coming Soon</div>;
 const Lesson = () => <div className="p-8">Lesson - Coming Soon</div>;
@@ -48,7 +48,7 @@ const AppContent: React.FC = () => {
           {/* Protected routes */}
           <Route path="/dashboard" element={
             <ProtectedRoute>
-              <Dashboard />
+              <DashboardPage />
             </ProtectedRoute>
           } />
           <Route path="/modules" element={
@@ -93,6 +93,11 @@ const AppContent: React.FC = () => {
           } />
           
           {/* Default redirect */}
+          <Route path="/" element={
+            <ProtectedRoute>
+              <Navigate to="/dashboard" replace />
+            </ProtectedRoute>
+          } />
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </main>

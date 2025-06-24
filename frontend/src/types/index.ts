@@ -55,6 +55,48 @@ export interface Achievement {
   earnedAt: Date;
 }
 
+// Dashboard-specific types
+export interface ModuleProgressDetail {
+  module_id: string;
+  module_title: string;
+  total_lessons: number;
+  completed_lessons: number;
+  progress_percentage: number;
+  status: 'not_started' | 'in_progress' | 'completed';
+}
+
+export interface UserProgressSummary {
+  total_modules: number;
+  completed_modules: number;
+  total_lessons: number;
+  completed_lessons: number;
+  total_exercises: number;
+  completed_exercises: number;
+  overall_progress_percentage: number;
+  module_progress: ModuleProgressDetail[];
+}
+
+export interface DashboardData {
+  user: {
+    id: string;
+    name: string;
+    email: string;
+  };
+  progressSummary: UserProgressSummary;
+  modules: Module[];
+  isLoading: boolean;
+  error: string | null;
+}
+
+export interface QuickAction {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  action: string;
+  enabled: boolean;
+}
+
 // Glossary types
 export interface GlossaryTerm {
   term: string;
@@ -84,4 +126,12 @@ export interface ExerciseResult {
   result: 'correct' | 'incorrect';
   timestamp: Date;
   feedback?: string;
+}
+
+// Dashboard state types
+export interface DashboardState {
+  data: DashboardData | null;
+  isLoading: boolean;
+  error: string | null;
+  lastUpdated: Date | null;
 }
