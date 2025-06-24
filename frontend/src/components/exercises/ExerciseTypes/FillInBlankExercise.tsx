@@ -47,26 +47,8 @@ export const FillInBlankExercise: React.FC<FillInBlankExerciseProps> = ({
     const text = exercise.content.text || '';
     const blanks = exercise.content.blanks || [];
     
-    // Simple implementation: replace placeholders with input fields
-    let renderedText = text;
-    
-    blanks.forEach((blank) => {
-      const placeholder = `[blank_${blank.id}]`;
-      const inputElement = (
-        <input
-          key={blank.id}
-          type="text"
-          value={blankAnswers[blank.id] || ''}
-          onChange={(e) => handleBlankChange(blank.id, e.target.value)}
-          disabled={disabled}
-          className="inline-block mx-1 px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-60"
-          style={{ width: '120px' }}
-        />
-      );
-      
-      // For now, we'll render a simple version
-      // In a real implementation, you'd parse the text and inject inputs
-    });
+    // For now, we'll render a simple version with separate inputs
+    // In a real implementation, you'd parse the text and inject inputs inline
     
     return (
       <div className="text-lg leading-relaxed">

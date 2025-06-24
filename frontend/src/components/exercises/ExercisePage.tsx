@@ -69,6 +69,7 @@ const ExercisePage: React.FC = () => {
       }));
 
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error fetching exercise:', error);
       setExerciseState(prev => ({
         ...prev,
@@ -118,6 +119,7 @@ const ExercisePage: React.FC = () => {
       }));
 
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error submitting exercise:', error);
       setExerciseState(prev => ({
         ...prev,
