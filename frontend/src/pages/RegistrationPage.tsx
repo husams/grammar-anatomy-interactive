@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 interface RegistrationForm {
   name: string;
@@ -8,58 +9,110 @@ interface RegistrationForm {
   confirmPassword: string;
 }
 
+interface ValidationErrors {
+  name?: string;
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
+}
+
 const RegistrationPage: React.FC = () => {
   const [form, setForm] = useState<RegistrationForm>({ name: '', email: '', password: '', confirmPassword: '' });
-  const [loading, setLoading] = useState(false);
+  const [validationErrors, setValidationErrors] = useState<ValidationErrors>({});
   const [error, setError] = useState<string | null>(null);
+  const { register, isLoading, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/dashboard');
+    }
+  }, [isAuthenticated, navigate]);
+
+  // Real-time validation function
+  const validateField = (name: string, value: string): string | undefined => {
+    switch (name) {
+      case 'name':
+        if (!value.trim()) return 'Name is required';
+        break;
+      case 'email':
+        if (!value) return 'Email is required';
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return 'Invalid email format';
+        break;
+      case 'password':
+        if (!value) return 'Password is required';
+        if (value.length < 8) return 'Password must be at least 8 characters';
+        break;
+      case 'confirmPassword':
+        if (!value) return 'Please confirm your password';
+        if (value !== form.password) return 'Passwords do not match';
+        break;
+    }
+    return undefined;
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+    
+    // Clear global error when user starts typing
+    if (error) setError(null);
+    
+    // Real-time validation
+    const fieldError = validateField(name, value);
+    setValidationErrors(prev => ({
+      ...prev,
+      [name]: fieldError
+    }));
+
+    // Re-validate confirm password when password changes
+    if (name === 'password' && form.confirmPassword) {
+      const confirmError = validateField('confirmPassword', form.confirmPassword);
+      setValidationErrors(prev => ({
+        ...prev,
+        confirmPassword: confirmError
+      }));
+    }
+  };
+
+  const validateForm = (): boolean => {
+    const errors: ValidationErrors = {};
+    let isValid = true;
+
+    // Validate all fields
+    Object.keys(form).forEach(key => {
+      const error = validateField(key, form[key as keyof RegistrationForm]);
+      if (error) {
+        errors[key as keyof ValidationErrors] = error;
+        isValid = false;
+      }
+    });
+
+    setValidationErrors(errors);
+    return isValid;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    if (form.password !== form.confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
-    if (form.password.length < 8) {
-      setError('Password must be at least 8 characters long');
-      return;
-    }
-    setLoading(true);
-    try {
-      const res = await fetch('/api/v1/users/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: form.name, email: form.email, password: form.password }),
-      });
-      if (!res.ok) {
-        const data = await res.json();
-        setError(data.detail || 'Registration failed');
-        setLoading(false);
-        return;
-      }
-      // Automatically log in after successful registration
-      const loginRes = await fetch('/api/v1/users/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: form.email, password: form.password }),
-      });
 
-      setLoading(false);
-      if (loginRes.ok) {
-        alert('Registration successful!');
+    // Validate form before submission
+    if (!validateForm()) {
+      return;
+    }
+
+    try {
+      const result = await register(form.name, form.email, form.password);
+      
+      if (result.success) {
+        // Registration and auto-login successful, user will be redirected by auth context
         navigate('/dashboard');
       } else {
-        // Fallback: show generic message if auto login fails
-        navigate('/login');
+        setError(result.error || 'Registration failed');
       }
     } catch (err) {
-      setError('Network error');
-      setLoading(false);
+      setError('An unexpected error occurred. Please try again.');
     }
   };
 
@@ -77,8 +130,15 @@ const RegistrationPage: React.FC = () => {
               value={form.name}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`w-full px-4 py-2 rounded border bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 ${
+                validationErrors.name 
+                  ? 'border-red-500 focus:ring-red-500' 
+                  : 'border-gray-300 dark:border-gray-600 focus:ring-blue-500'
+              }`}
             />
+            {validationErrors.name && (
+              <p className="mt-1 text-sm text-red-600 dark:text-red-400">{validationErrors.name}</p>
+            )}
           </div>
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Email</label>
@@ -89,8 +149,15 @@ const RegistrationPage: React.FC = () => {
               value={form.email}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`w-full px-4 py-2 rounded border bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 ${
+                validationErrors.email 
+                  ? 'border-red-500 focus:ring-red-500' 
+                  : 'border-gray-300 dark:border-gray-600 focus:ring-blue-500'
+              }`}
             />
+            {validationErrors.email && (
+              <p className="mt-1 text-sm text-red-600 dark:text-red-400">{validationErrors.email}</p>
+            )}
           </div>
           <div>
             <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Password</label>
@@ -101,8 +168,15 @@ const RegistrationPage: React.FC = () => {
               value={form.password}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`w-full px-4 py-2 rounded border bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 ${
+                validationErrors.password 
+                  ? 'border-red-500 focus:ring-red-500' 
+                  : 'border-gray-300 dark:border-gray-600 focus:ring-blue-500'
+              }`}
             />
+            {validationErrors.password && (
+              <p className="mt-1 text-sm text-red-600 dark:text-red-400">{validationErrors.password}</p>
+            )}
           </div>
           <div>
             <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Confirm Password</label>
@@ -113,16 +187,37 @@ const RegistrationPage: React.FC = () => {
               value={form.confirmPassword}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`w-full px-4 py-2 rounded border bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 ${
+                validationErrors.confirmPassword 
+                  ? 'border-red-500 focus:ring-red-500' 
+                  : 'border-gray-300 dark:border-gray-600 focus:ring-blue-500'
+              }`}
             />
+            {validationErrors.confirmPassword && (
+              <p className="mt-1 text-sm text-red-600 dark:text-red-400">{validationErrors.confirmPassword}</p>
+            )}
           </div>
-          {error && <div className="text-red-600 dark:text-red-400 text-sm">{error}</div>}
+          {error && (
+            <div className="p-3 rounded-md bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700">
+              <p className="text-red-800 dark:text-red-200 text-sm">{error}</p>
+            </div>
+          )}
           <button
             type="submit"
-            disabled={loading}
-            className="w-full py-2 px-4 rounded bg-blue-600 hover:bg-blue-700 text-white font-semibold transition disabled:opacity-60"
+            disabled={isLoading}
+            className="w-full py-2 px-4 rounded bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold transition disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            {loading ? 'Registering...' : 'Register'}
+            {isLoading ? (
+              <span className="flex items-center justify-center">
+                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Registering...
+              </span>
+            ) : (
+              'Register'
+            )}
           </button>
         </form>
         <div className="flex justify-center mt-6 text-sm">
