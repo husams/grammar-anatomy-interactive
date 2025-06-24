@@ -23,18 +23,98 @@ export interface Lesson {
   order: number;
 }
 
-// Exercise types
+// Exercise types (comprehensive implementation)
+export type ExerciseType = 'multiple_choice' | 'fill_in_blank' | 'identification' | 'sentence_construction';
+
 export interface Exercise {
   id: string;
-  lessonId: string;
-  type:
-    | 'identification'
-    | 'multiple_choice'
-    | 'fill_blank'
-    | 'sentence_construction';
+  lesson_id: string;
+  title: string;
+  type: ExerciseType;
   prompt: string;
-  answer: string;
+  content: ExerciseContent;
+  order: number;
+  created_at: string;
+}
+
+export interface ExerciseContent {
+  // Multiple Choice
   options?: string[];
+  correct_answer?: string | number;
+  
+  // Fill in Blank
+  text?: string;
+  blanks?: Array<{
+    id: string;
+    position: number;
+    correct_answers: string[];
+    case_sensitive?: boolean;
+  }>;
+  
+  // Identification
+  target_text?: string;
+  target_elements?: Array<{
+    id: string;
+    text: string;
+    type: string;
+    explanation: string;
+  }>;
+  
+  // Sentence Construction
+  words?: string[];
+  correct_sentence?: string;
+  alternative_correct?: string[];
+}
+
+export interface ExerciseSubmission {
+  answer: ExerciseAnswer;
+  time_spent?: number;
+}
+
+export interface ExerciseAnswer {
+  // Multiple Choice
+  selected_option?: string | number;
+  
+  // Fill in Blank
+  blank_answers?: Record<string, string>;
+  
+  // Identification
+  identified_elements?: string[];
+  
+  // Sentence Construction
+  constructed_sentence?: string;
+}
+
+export interface ExerciseResult {
+  exercise_id: string;
+  user_id: string;
+  answer: ExerciseAnswer;
+  is_correct: boolean;
+  score: number; // 0-1
+  feedback: ExerciseFeedback;
+  time_spent?: number;
+  submitted_at: string;
+}
+
+export interface ExerciseFeedback {
+  message: string;
+  explanation?: string;
+  correct_answer?: ExerciseAnswer;
+  hints?: string[];
+  next_steps?: {
+    action: 'retry' | 'continue' | 'review';
+    message: string;
+  };
+}
+
+export interface ExerciseState {
+  current_exercise: Exercise | null;
+  user_answer: ExerciseAnswer | null;
+  result: ExerciseResult | null;
+  is_loading: boolean;
+  error: string | null;
+  time_started: Date | null;
+  attempts: number;
 }
 
 // Progress types
@@ -120,12 +200,12 @@ export interface ApiResponse<T> {
   error?: string;
 }
 
-// Exercise result types
-export interface ExerciseResult {
+// Legacy exercise result types (deprecated - use ExerciseResult from exercise types above)
+export interface LegacyExerciseResult {
   exerciseId: string;
   result: 'correct' | 'incorrect';
   timestamp: Date;
-  feedback?: string;
+  legacyFeedback?: string;
 }
 
 // Dashboard state types

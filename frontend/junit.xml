@@ -1,7 +1,218 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="1" failures="0" errors="0" time="0.496">
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2025-06-24T17:30:44" time="0.192" tests="1">
-    <testcase classname=" renders test setup correctly" name=" renders test setup correctly" time="0.009">
+<testsuites name="jest tests" tests="45" failures="1" errors="0" time="0.664">
+  <testsuite name="ExerciseFeedback" errors="0" failures="0" skipped="0" timestamp="2025-06-24T22:04:18" time="0.296" tests="15">
+    <testcase classname="ExerciseFeedback displays correct feedback for correct answers" name="ExerciseFeedback displays correct feedback for correct answers" time="0.015">
+    </testcase>
+    <testcase classname="ExerciseFeedback displays incorrect feedback for wrong answers" name="ExerciseFeedback displays incorrect feedback for wrong answers" time="0.004">
+    </testcase>
+    <testcase classname="ExerciseFeedback shows hints when available" name="ExerciseFeedback shows hints when available" time="0.001">
+    </testcase>
+    <testcase classname="ExerciseFeedback shows try again button for incorrect answers" name="ExerciseFeedback shows try again button for incorrect answers" time="0.014">
+    </testcase>
+    <testcase classname="ExerciseFeedback shows continue button for correct answers when specified" name="ExerciseFeedback shows continue button for correct answers when specified" time="0.004">
+    </testcase>
+    <testcase classname="ExerciseFeedback does not show try again button for correct answers" name="ExerciseFeedback does not show try again button for correct answers" time="0.001">
+    </testcase>
+    <testcase classname="ExerciseFeedback applies correct styling for correct answers" name="ExerciseFeedback applies correct styling for correct answers" time="0.002">
+    </testcase>
+    <testcase classname="ExerciseFeedback applies correct styling for incorrect answers" name="ExerciseFeedback applies correct styling for incorrect answers" time="0.001">
+    </testcase>
+    <testcase classname="ExerciseFeedback displays correct icons for feedback state" name="ExerciseFeedback displays correct icons for feedback state" time="0.001">
+    </testcase>
+    <testcase classname="ExerciseFeedback handles missing explanation gracefully" name="ExerciseFeedback handles missing explanation gracefully" time="0.001">
+    </testcase>
+    <testcase classname="ExerciseFeedback handles missing hints gracefully" name="ExerciseFeedback handles missing hints gracefully" time="0.001">
+    </testcase>
+    <testcase classname="ExerciseFeedback handles empty hints array" name="ExerciseFeedback handles empty hints array" time="0.001">
+    </testcase>
+    <testcase classname="ExerciseFeedback renders multiple hints correctly" name="ExerciseFeedback renders multiple hints correctly" time="0.002">
+    </testcase>
+    <testcase classname="ExerciseFeedback shows appropriate button styling" name="ExerciseFeedback shows appropriate button styling" time="0.004">
+    </testcase>
+    <testcase classname="ExerciseFeedback maintains accessibility with proper ARIA attributes" name="ExerciseFeedback maintains accessibility with proper ARIA attributes" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="MultipleChoiceExercise" errors="0" failures="0" skipped="0" timestamp="2025-06-24T22:04:18" time="0.081" tests="14">
+    <testcase classname="MultipleChoiceExercise renders exercise prompt and options correctly" name="MultipleChoiceExercise renders exercise prompt and options correctly" time="0.004">
+    </testcase>
+    <testcase classname="MultipleChoiceExercise allows selecting an option" name="MultipleChoiceExercise allows selecting an option" time="0.006">
+    </testcase>
+    <testcase classname="MultipleChoiceExercise allows changing selection" name="MultipleChoiceExercise allows changing selection" time="0.004">
+    </testcase>
+    <testcase classname="MultipleChoiceExercise enables submit button when option is selected" name="MultipleChoiceExercise enables submit button when option is selected" time="0.008">
+    </testcase>
+    <testcase classname="MultipleChoiceExercise calls onSubmit with correct answer when submitted" name="MultipleChoiceExercise calls onSubmit with correct answer when submitted" time="0.005">
+    </testcase>
+    <testcase classname="MultipleChoiceExercise shows submitting state after submission" name="MultipleChoiceExercise shows submitting state after submission" time="0.004">
+    </testcase>
+    <testcase classname="MultipleChoiceExercise pre-selects option when userAnswer is provided" name="MultipleChoiceExercise pre-selects option when userAnswer is provided" time="0.001">
+    </testcase>
+    <testcase classname="MultipleChoiceExercise disables interaction when disabled prop is true" name="MultipleChoiceExercise disables interaction when disabled prop is true" time="0.002">
+    </testcase>
+    <testcase classname="MultipleChoiceExercise hides submit button when showResult is true" name="MultipleChoiceExercise hides submit button when showResult is true" time="0.002">
+    </testcase>
+    <testcase classname="MultipleChoiceExercise applies correct styling for selected options" name="MultipleChoiceExercise applies correct styling for selected options" time="0.003">
+    </testcase>
+    <testcase classname="MultipleChoiceExercise applies disabled styling when disabled" name="MultipleChoiceExercise applies disabled styling when disabled" time="0.004">
+    </testcase>
+    <testcase classname="MultipleChoiceExercise handles empty options gracefully" name="MultipleChoiceExercise handles empty options gracefully" time="0.001">
+    </testcase>
+    <testcase classname="MultipleChoiceExercise provides accessible labels and roles" name="MultipleChoiceExercise provides accessible labels and roles" time="0.005">
+    </testcase>
+    <testcase classname="MultipleChoiceExercise maintains focus management for keyboard navigation" name="MultipleChoiceExercise maintains focus management for keyboard navigation" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="FillInBlankExercise" errors="0" failures="1" skipped="0" timestamp="2025-06-24T22:04:18" time="0.121" tests="16">
+    <testcase classname="FillInBlankExercise renders exercise prompt and text correctly" name="FillInBlankExercise renders exercise prompt and text correctly" time="0.002">
+    </testcase>
+    <testcase classname="FillInBlankExercise renders input fields for each blank" name="FillInBlankExercise renders input fields for each blank" time="0.003">
+      <failure>TestingLibraryElementError: Found multiple elements with the display value: .
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+&lt;input
+  class=&quot;px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-60&quot;
+  placeholder=&quot;Type your answer here...&quot;
+  type=&quot;text&quot;
+  value=&quot;&quot;
+/&gt;
+
+Ignored nodes: comments, script, style
+&lt;input
+  class=&quot;px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-60&quot;
+  placeholder=&quot;Type your answer here...&quot;
+  type=&quot;text&quot;
+  value=&quot;&quot;
+/&gt;
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;px-6 py-8&quot;
+    &gt;
+      &lt;div
+        class=&quot;mb-6&quot;
+      &gt;
+        &lt;h2
+          class=&quot;text-xl font-semibold text-gray-900 mb-4&quot;
+        &gt;
+          Complete the following sentence:
+        &lt;/h2&gt;
+      &lt;/div&gt;
+      &lt;div
+        class=&quot;mb-8&quot;
+      &gt;
+        &lt;div
+          class=&quot;text-lg leading-relaxed&quot;
+        &gt;
+          &lt;p
+            class=&quot;mb-4&quot;
+          &gt;
+            The cat ____ on the mat.
+          &lt;/p&gt;
+          &lt;div
+            class=&quot;space-y-4&quot;
+          &gt;
+            &lt;div
+              class=&quot;flex items-center space-x-2&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-gray-600&quot;
+              &gt;
+                Blank 
+                1
+                :
+              &lt;/span&gt;
+              &lt;input
+                class=&quot;px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-60&quot;
+                placeholder=&quot;Type your answer here...&quot;
+                type=&quot;text&quot;
+                value=&quot;&quot;
+              /&gt;
+            &lt;/div&gt;
+            &lt;div
+              class=&quot;flex items-center space-x-2&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-gray-600&quot;
+              &gt;
+                Blank 
+                2
+                :
+              &lt;/span&gt;
+              &lt;input
+                class=&quot;px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-60&quot;
+                placeholder=&quot;Type your answer here...&quot;
+                type=&quot;text&quot;
+                value=&quot;&quot;
+              /&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div
+        class=&quot;flex justify-end&quot;
+      &gt;
+        &lt;button
+          class=&quot;px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed&quot;
+          disabled=&quot;&quot;
+        &gt;
+          Submit Answer
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+    at Object.getElementError (/Users/husam/workspace/tutor/grammar-anatomy-app/frontend/node_modules/@testing-library/dom/dist/config.js:37:19)
+    at getElementError (/Users/husam/workspace/tutor/grammar-anatomy-app/frontend/node_modules/@testing-library/dom/dist/query-helpers.js:20:35)
+    at getMultipleElementsFoundError (/Users/husam/workspace/tutor/grammar-anatomy-app/frontend/node_modules/@testing-library/dom/dist/query-helpers.js:23:10)
+    at /Users/husam/workspace/tutor/grammar-anatomy-app/frontend/node_modules/@testing-library/dom/dist/query-helpers.js:55:13
+    at getByDisplayValue (/Users/husam/workspace/tutor/grammar-anatomy-app/frontend/node_modules/@testing-library/dom/dist/query-helpers.js:95:19)
+    at Object.&lt;anonymous&gt; (/Users/husam/workspace/tutor/grammar-anatomy-app/frontend/src/components/exercises/__tests__/FillInBlankExercise.test.tsx:61:19)
+    at Promise.then.completed (/Users/husam/workspace/tutor/grammar-anatomy-app/frontend/node_modules/jest-circus/build/utils.js:391:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/husam/workspace/tutor/grammar-anatomy-app/frontend/node_modules/jest-circus/build/utils.js:316:10)
+    at _callCircusTest (/Users/husam/workspace/tutor/grammar-anatomy-app/frontend/node_modules/jest-circus/build/run.js:218:40)
+    at _runTest (/Users/husam/workspace/tutor/grammar-anatomy-app/frontend/node_modules/jest-circus/build/run.js:155:3)
+    at _runTestsForDescribeBlock (/Users/husam/workspace/tutor/grammar-anatomy-app/frontend/node_modules/jest-circus/build/run.js:66:9)
+    at _runTestsForDescribeBlock (/Users/husam/workspace/tutor/grammar-anatomy-app/frontend/node_modules/jest-circus/build/run.js:60:9)
+    at run (/Users/husam/workspace/tutor/grammar-anatomy-app/frontend/node_modules/jest-circus/build/run.js:25:3)
+    at runAndTransformResultsToJestFormat (/Users/husam/workspace/tutor/grammar-anatomy-app/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:170:21)
+    at jestAdapter (/Users/husam/workspace/tutor/grammar-anatomy-app/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:82:19)
+    at runTestInternal (/Users/husam/workspace/tutor/grammar-anatomy-app/frontend/node_modules/jest-runner/build/runTest.js:389:16)
+    at runTest (/Users/husam/workspace/tutor/grammar-anatomy-app/frontend/node_modules/jest-runner/build/runTest.js:475:34)</failure>
+    </testcase>
+    <testcase classname="FillInBlankExercise updates answer when user types in blanks" name="FillInBlankExercise updates answer when user types in blanks" time="0.003">
+    </testcase>
+    <testcase classname="FillInBlankExercise enables submit button only when all blanks are filled" name="FillInBlankExercise enables submit button only when all blanks are filled" time="0.006">
+    </testcase>
+    <testcase classname="FillInBlankExercise calls onSubmit with correct answers when submitted" name="FillInBlankExercise calls onSubmit with correct answers when submitted" time="0.003">
+    </testcase>
+    <testcase classname="FillInBlankExercise shows submitting state after submission" name="FillInBlankExercise shows submitting state after submission" time="0.003">
+    </testcase>
+    <testcase classname="FillInBlankExercise pre-fills blanks when userAnswer is provided" name="FillInBlankExercise pre-fills blanks when userAnswer is provided" time="0.002">
+    </testcase>
+    <testcase classname="FillInBlankExercise disables interaction when disabled prop is true" name="FillInBlankExercise disables interaction when disabled prop is true" time="0.001">
+    </testcase>
+    <testcase classname="FillInBlankExercise hides submit button when showResult is true" name="FillInBlankExercise hides submit button when showResult is true" time="0">
+    </testcase>
+    <testcase classname="FillInBlankExercise handles empty blanks array gracefully" name="FillInBlankExercise handles empty blanks array gracefully" time="0.001">
+    </testcase>
+    <testcase classname="FillInBlankExercise handles whitespace-only answers correctly" name="FillInBlankExercise handles whitespace-only answers correctly" time="0.003">
+    </testcase>
+    <testcase classname="FillInBlankExercise applies correct styling for input states" name="FillInBlankExercise applies correct styling for input states" time="0.002">
+    </testcase>
+    <testcase classname="FillInBlankExercise applies disabled styling when disabled" name="FillInBlankExercise applies disabled styling when disabled" time="0.001">
+    </testcase>
+    <testcase classname="FillInBlankExercise provides accessible labels for inputs" name="FillInBlankExercise provides accessible labels for inputs" time="0.001">
+    </testcase>
+    <testcase classname="FillInBlankExercise maintains input state during component re-renders" name="FillInBlankExercise maintains input state during component re-renders" time="0.002">
+    </testcase>
+    <testcase classname="FillInBlankExercise handles special characters in answers" name="FillInBlankExercise handles special characters in answers" time="0.001">
     </testcase>
   </testsuite>
 </testsuites>
