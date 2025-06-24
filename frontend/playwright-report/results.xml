@@ -1,99 +1,10 @@
-<testsuites id="" name="" tests="3" failures="3" skipped="0" errors="0" time="16.761697">
-<testsuite name="auth.spec.ts" timestamp="2025-06-22T16:10:52.863Z" hostname="chromium" tests="3" failures="3" skipped="0" time="15.835" errors="0">
-<testcase name="Authentication E2E › User can register, login, and request password reset (real backend)" classname="auth.spec.ts" time="5.343">
-<failure message="auth.spec.ts:4:7 User can register, login, and request password reset (real backend)" type="FAILURE">
-<![CDATA[  [chromium] › auth.spec.ts:4:7 › Authentication E2E › User can register, login, and request password reset (real backend) 
-
-    Error: Timed out 5000ms waiting for expect(locator).toBeVisible()
-
-    Locator: getByText(/registration successful! you can now log in\./i)
-    Expected: visible
-    Received: <element(s) not found>
-    Call log:
-      - Expect "toBeVisible" with timeout 5000ms
-      - waiting for getByText(/registration successful! you can now log in\./i)
-
-
-      21 |     await page.fill('input[name="confirmPassword"]', 'TestPass123!');
-      22 |     await page.click('button:has-text("Register")');
-    > 23 |     await expect(page.getByText(/registration successful! you can now log in\./i)).toBeVisible();
-         |                                                                                    ^
-      24 |
-      25 |     // Go back to login
-      26 |     await page.click('text=back to login');
-        at /Users/husam/workspace/tutor/grammar-anatomy-app/frontend/e2e/auth.spec.ts:23:84
-
-    Error Context: ../test-results/auth-Authentication-E2E-Us-ea33b-assword-reset-real-backend--chromium/error-context.md
-]]>
-</failure>
-<system-out>
-<![CDATA[
-[[ATTACHMENT|../test-results/auth-Authentication-E2E-Us-ea33b-assword-reset-real-backend--chromium/error-context.md]]
-]]>
-</system-out>
+<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="2.061924">
+<testsuite name="auth.spec.ts" timestamp="2025-06-24T16:42:40.164Z" hostname="chromium" tests="3" failures="0" skipped="0" time="1.731" errors="0">
+<testcase name="Authentication E2E › User can register, login, and request password reset (real backend)" classname="auth.spec.ts" time="0.856">
 </testcase>
-<testcase name="Authentication E2E › User sees an error when trying to register with an existing email" classname="auth.spec.ts" time="5.244">
-<failure message="auth.spec.ts:44:7 User sees an error when trying to register with an existing email" type="FAILURE">
-<![CDATA[  [chromium] › auth.spec.ts:44:7 › Authentication E2E › User sees an error when trying to register with an existing email 
-
-    Error: Timed out 5000ms waiting for expect(locator).toBeVisible()
-
-    Locator: getByText(/registration successful! you can now log in./i)
-    Expected: visible
-    Received: <element(s) not found>
-    Call log:
-      - Expect "toBeVisible" with timeout 5000ms
-      - waiting for getByText(/registration successful! you can now log in./i)
-
-
-      51 |     await page.fill('input[name="confirmPassword"]', 'TestPass123!');
-      52 |     await page.click('button:has-text("Register")');
-    > 53 |     await expect(page.getByText(/registration successful! you can now log in./i)).toBeVisible();
-         |                                                                                   ^
-      54 |
-      55 |     // Now, try to register again with the same email.
-      56 |     await page.goto('/register');
-        at /Users/husam/workspace/tutor/grammar-anatomy-app/frontend/e2e/auth.spec.ts:53:83
-
-    Error Context: ../test-results/auth-Authentication-E2E-Us-a1585-ster-with-an-existing-email-chromium/error-context.md
-]]>
-</failure>
-<system-out>
-<![CDATA[
-[[ATTACHMENT|../test-results/auth-Authentication-E2E-Us-a1585-ster-with-an-existing-email-chromium/error-context.md]]
-]]>
-</system-out>
+<testcase name="Authentication E2E › User sees an error when trying to register with an existing email" classname="auth.spec.ts" time="0.695">
 </testcase>
-<testcase name="Authentication E2E › User sees an error when trying to register with an invalid password" classname="auth.spec.ts" time="5.248">
-<failure message="auth.spec.ts:67:7 User sees an error when trying to register with an invalid password" type="FAILURE">
-<![CDATA[  [chromium] › auth.spec.ts:67:7 › Authentication E2E › User sees an error when trying to register with an invalid password 
-
-    Error: Timed out 5000ms waiting for expect(locator).toBeVisible()
-
-    Locator: getByText(/password must be at least 8 characters/i)
-    Expected: visible
-    Received: <element(s) not found>
-    Call log:
-      - Expect "toBeVisible" with timeout 5000ms
-      - waiting for getByText(/password must be at least 8 characters/i)
-
-
-      75 |
-      76 |     // Check for the error message.
-    > 77 |     await expect(page.getByText(/password must be at least 8 characters/i)).toBeVisible();
-         |                                                                             ^
-      78 |   });
-      79 | });
-        at /Users/husam/workspace/tutor/grammar-anatomy-app/frontend/e2e/auth.spec.ts:77:77
-
-    Error Context: ../test-results/auth-Authentication-E2E-Us-fc0a9-er-with-an-invalid-password-chromium/error-context.md
-]]>
-</failure>
-<system-out>
-<![CDATA[
-[[ATTACHMENT|../test-results/auth-Authentication-E2E-Us-fc0a9-er-with-an-invalid-password-chromium/error-context.md]]
-]]>
-</system-out>
+<testcase name="Authentication E2E › User sees an error when trying to register with an invalid password" classname="auth.spec.ts" time="0.18">
 </testcase>
 </testsuite>
 </testsuites>
