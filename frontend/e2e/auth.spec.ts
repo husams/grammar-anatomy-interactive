@@ -44,6 +44,10 @@ test.describe('Authentication E2E', () => {
     await page.click('button:has-text("Register")');
     await expect(page).toHaveURL('/dashboard');
 
+    // Logout the user so we can access the registration page again
+    await page.click('button:has-text("Logout")');
+    await expect(page).toHaveURL('/login');
+
     // Now, try to register again with the same email.
     await page.goto('/register');
     await page.fill('input[name="email"]', email);
