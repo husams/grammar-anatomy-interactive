@@ -14,11 +14,36 @@ router = APIRouter()
 
 @router.get("/", response_model=List[ModuleResponse])
 async def get_modules(
+    search: str | None = None,
+    status: str | None = None,
+    sort_by: str = "order",
+    sort_direction: str = "asc",
+    skip: int = 0,
+    limit: int = 100,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_active_user)
 ):
-    """Get all modules with lesson counts."""
-    modules = db.query(Module).order_by(Module.order).all()
+    """Get all modules with lesson counts, search, and filtering."""
+    query = db.query(Module)
+    
+    # Apply search filter
+    if search:
+        query = query.filter(Module.title.ilike(f"%{search}%"))
+    
+    # Apply sorting
+    if sort_by == "title":
+        if sort_direction == "desc":
+            query = query.order_by(Module.title.desc())
+        else:
+            query = query.order_by(Module.title.asc())
+    else:  # Default to order
+        if sort_direction == "desc":
+            query = query.order_by(Module.order.desc())
+        else:
+            query = query.order_by(Module.order.asc())
+    
+    # Apply pagination
+    modules = query.offset(skip).limit(limit).all()
     
     # Add lesson count to each module
     result = []
