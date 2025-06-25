@@ -18,6 +18,82 @@ export interface Module {
   estimated_duration?: number; // minutes
 }
 
+export interface ModuleDetail extends Module {
+  exercise_count: number;
+  learning_objectives: string[];
+  prerequisites: string[];
+  lessons: LessonSummary[];
+  updated_at: string;
+}
+
+export interface LessonSummary {
+  id: string;
+  title: string;
+  order: number;
+  duration: number; // minutes
+  lesson_type: 'content' | 'exercise' | 'quiz' | 'practice';
+  is_locked: boolean;
+  description: string;
+}
+
+export interface ModuleProgress {
+  module_id: string;
+  user_id: string;
+  overall_progress: number; // 0-1
+  status: 'not_started' | 'in_progress' | 'completed' | 'mastered';
+  lessons_completed: number;
+  total_lessons: number;
+  exercises_completed: number;
+  total_exercises: number;
+  time_spent: number; // minutes
+  estimated_time_remaining: number; // minutes
+  last_accessed_lesson?: {
+    lesson_id: string;
+    lesson_title: string;
+    position: number;
+  };
+  lesson_progress: LessonProgress[];
+  achievements: Achievement[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface LessonProgress {
+  lesson_id: string;
+  status: 'not_started' | 'in_progress' | 'completed';
+  completion_date?: string;
+  time_spent: number;
+  score?: number; // 0-1 for exercises
+}
+
+export interface RelatedModules {
+  prerequisites: Array<{
+    id: string;
+    title: string;
+    is_completed: boolean;
+  }>;
+  recommended_next: Array<{
+    id: string;
+    title: string;
+    difficulty: string;
+    estimated_duration: number;
+  }>;
+  related_topics: Array<{
+    id: string;
+    title: string;
+    similarity_score: number;
+  }>;
+}
+
+export interface ModuleDetailState {
+  module: ModuleDetail | null;
+  progress: ModuleProgress | null;
+  relatedModules: RelatedModules | null;
+  isLoading: boolean;
+  error: string | null;
+  isNavigating: boolean;
+}
+
 export interface ModuleProgressDetail {
   module_id: string;
   total_lessons: number;
@@ -175,9 +251,9 @@ export interface Progress {
 // Achievement types
 export interface Achievement {
   id: string;
-  userId: string;
-  type: string;
-  earnedAt: Date;
+  title: string;
+  description: string;
+  earned_date: string;
 }
 
 // Dashboard-specific types  
