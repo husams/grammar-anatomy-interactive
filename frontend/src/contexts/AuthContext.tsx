@@ -67,7 +67,8 @@ const tokenStorage = {
 
 // API utilities
 const apiCall = async (endpoint: string, options: RequestInit = {}) => {
-  const url = `http://localhost:8000/api/v1${endpoint}`;
+  const baseUrl = process.env.NODE_ENV === 'production' ? '/api/v1' : 'http://localhost:8000/api/v1';
+  const url = `${baseUrl}${endpoint}`;
   console.log('🔥 Making API call to:', url);
   console.log('🔥 Options:', JSON.stringify(options, null, 2));
   
@@ -85,7 +86,24 @@ const apiCall = async (endpoint: string, options: RequestInit = {}) => {
     console.log('🔥 Response ok:', response.ok);
     console.log('🔥 Response type:', response.type);
 
-    const data = await response.json();
+    // Check for HTML response before parsing
+    const text = await response.text();
+    console.log('🔥 Response text (first 100 chars):', text.substring(0, 100));
+    
+    // Check if response starts with HTML doctype or tags
+    if (text.trim().startsWith('<!DOCTYPE') || 
+        text.trim().startsWith('<html') ||
+        text.trim().startsWith('<HTML')) {
+      throw new Error('Server returned HTML instead of JSON (possible authentication failure)');
+    }
+
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch (parseError) {
+      throw new Error(`Invalid JSON response: ${parseError instanceof Error ? parseError.message : 'Unknown error'}`);
+    }
+    
     console.log('🔥 Response data:', data);
     
     if (!response.ok) {

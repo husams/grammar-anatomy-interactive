@@ -1,6 +1,5 @@
 import { Module, ModuleSearchParams, UserProgressSummary } from '../types';
-
-const API_BASE = '/api/v1';
+import ApiClient from '../utils/apiClient';
 
 export class ModuleService {
   /**
@@ -10,42 +9,29 @@ export class ModuleService {
     data: Module[];
     total: number;
   }> {
-    const searchParams = new URLSearchParams();
+    const queryParams: Record<string, string> = {};
     
     if (params?.search) {
-      searchParams.append('search', params.search);
+      queryParams.search = params.search;
     }
     if (params?.status && params.status !== 'all') {
-      searchParams.append('status', params.status);
+      queryParams.status = params.status;
     }
     if (params?.sortBy) {
-      searchParams.append('sort_by', params.sortBy);
+      queryParams.sort_by = params.sortBy;
     }
     if (params?.sortDirection) {
-      searchParams.append('sort_direction', params.sortDirection);
+      queryParams.sort_direction = params.sortDirection;
     }
     if (params?.skip !== undefined) {
-      searchParams.append('skip', params.skip.toString());
+      queryParams.skip = params.skip.toString();
     }
     if (params?.limit !== undefined) {
-      searchParams.append('limit', params.limit.toString());
+      queryParams.limit = params.limit.toString();
     }
 
-    const queryString = searchParams.toString();
-    const url = `${API_BASE}/modules/${queryString ? `?${queryString}` : ''}`;
-    
-    const response = await fetch(url, {
-      headers: {
-        'Authorization': `Bearer ${this.getAuthToken()}`,
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch modules: ${response.statusText}`);
-    }
-
-    const result = await response.json();
+    const response = await ApiClient.get<Module[] | { data: Module[]; total: number }>('/modules', queryParams);
+    const result = response.data;
     
     // Handle both array response and paginated response formats
     if (Array.isArray(result)) {
@@ -65,39 +51,23 @@ export class ModuleService {
    * Fetches a specific module by ID
    */
   static async getModule(moduleId: string): Promise<Module> {
-    const response = await fetch(`${API_BASE}/modules/${moduleId}`, {
-      headers: {
-        'Authorization': `Bearer ${this.getAuthToken()}`,
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (!response.ok) {
-      if (response.status === 404) {
+    try {
+      const response = await ApiClient.get<Module>(`/modules/${moduleId}`);
+      return response.data;
+    } catch (error: any) {
+      if (error.status === 404) {
         throw new Error('Module not found');
       }
-      throw new Error(`Failed to fetch module: ${response.statusText}`);
+      throw error;
     }
-
-    return response.json();
   }
 
   /**
    * Fetches user progress summary including module progress
    */
   static async getUserProgressSummary(): Promise<UserProgressSummary> {
-    const response = await fetch(`${API_BASE}/progress/summary`, {
-      headers: {
-        'Authorization': `Bearer ${this.getAuthToken()}`,
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch progress summary: ${response.statusText}`);
-    }
-
-    return response.json();
+    const response = await ApiClient.get<UserProgressSummary>('/progress/summary');
+    return response.data;
   }
 
   /**
@@ -111,40 +81,16 @@ export class ModuleService {
       return [];
     }
 
-    const response = await fetch(`${API_BASE}/modules?search=${encodeURIComponent(query)}`, {
-      headers: {
-        'Authorization': `Bearer ${this.getAuthToken()}`,
-        'Content-Type': 'application/json',
-      },
+    const searchParams = new URLSearchParams({ search: query });
+    const response = await ApiClient.request<Module[] | { data: Module[] }>(`/modules?${searchParams.toString()}`, {
+      method: 'GET',
       signal: abortSignal,
     });
-
-    if (!response.ok) {
-      throw new Error(`Search failed: ${response.statusText}`);
-    }
-
-    const result = await response.json();
+    
+    const result = response.data;
     return Array.isArray(result) ? result : result.data || [];
   }
 
-  /**
-   * Gets authentication token from storage
-   */
-  private static getAuthToken(): string {
-    // Try multiple possible token keys for backward compatibility
-    const token = localStorage.getItem('grammar_anatomy_token') || 
-                  localStorage.getItem('access_token') ||
-                  localStorage.getItem('authToken') ||
-                  sessionStorage.getItem('access_token') ||
-                  sessionStorage.getItem('grammar_anatomy_token');
-    
-    if (!token) {
-      console.warn('No authentication token found in storage. Available keys:', 
-        Object.keys(localStorage).filter(key => key.includes('token') || key.includes('auth')));
-      throw new Error('No authentication token found');
-    }
-    return token;
-  }
 
   /**
    * Validates module data

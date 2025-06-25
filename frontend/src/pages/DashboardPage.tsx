@@ -6,24 +6,7 @@ import ModulesList from '../components/dashboard/ModulesList';
 import QuickActions from '../components/dashboard/QuickActions';
 import LoadingStates from '../components/dashboard/LoadingStates';
 import ErrorBoundary from '../components/dashboard/ErrorBoundary';
-
-// API utility function following existing pattern from AuthContext
-const apiCall = async (endpoint: string, token: string) => {
-  const response = await fetch(`http://localhost:8000/api/v1${endpoint}`, {
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-    },
-  });
-
-  const data = await response.json();
-  
-  if (!response.ok) {
-    throw new Error(data.detail || `HTTP ${response.status}: ${response.statusText}`);
-  }
-  
-  return data;
-};
+import ApiClient from '../utils/apiClient';
 
 const DashboardPage: React.FC = () => {
   const { user, token, isAuthenticated } = useAuth();
@@ -41,10 +24,13 @@ const DashboardPage: React.FC = () => {
       setDashboardState(prev => ({ ...prev, isLoading: true, error: null }));
 
       // Fetch progress summary and modules in parallel
-      const [progressSummary, modules] = await Promise.all([
-        apiCall('/progress/summary', token) as Promise<UserProgressSummary>,
-        apiCall('/modules/', token) as Promise<Module[]>,
+      const [progressResponse, modulesResponse] = await Promise.all([
+        ApiClient.get<UserProgressSummary>('/progress/summary'),
+        ApiClient.get<Module[]>('/modules/'),
       ]);
+      
+      const progressSummary = progressResponse.data;
+      const modules = modulesResponse.data;
 
       setDashboardState({
         data: {
