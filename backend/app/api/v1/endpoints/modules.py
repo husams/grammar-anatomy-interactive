@@ -4,7 +4,7 @@ from typing import List
 from app.db.base import get_db
 from app.models.module import Module
 from app.models.lesson import Lesson
-from app.schemas.module import ModuleCreate, ModuleUpdate, ModuleResponse
+from app.schemas.module import ModuleCreate, ModuleUpdate, ModuleResponse, ModuleDetailResponse, LessonSummary
 from app.api.deps import get_current_active_user
 from app.models.user import User
 import uuid
@@ -56,13 +56,13 @@ async def get_modules(
     return result
 
 
-@router.get("/{module_id}", response_model=ModuleResponse)
+@router.get("/{module_id}", response_model=ModuleDetailResponse)
 async def get_module(
     module_id: str,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_active_user)
 ):
-    """Get a specific module by ID."""
+    """Get a specific module by ID with lessons."""
     try:
         module_uuid = uuid.UUID(module_id)
     except ValueError:
@@ -78,12 +78,39 @@ async def get_module(
             detail="Module not found"
         )
     
-    # Add lesson count
-    lesson_count = db.query(Lesson).filter(Lesson.module_id == module.id).count()
-    module_dict = ModuleResponse.model_validate(module)
-    module_dict.lesson_count = lesson_count
+    # Get lessons for this module
+    lessons = db.query(Lesson).filter(Lesson.module_id == module.id).order_by(Lesson.order).all()
     
-    return module_dict
+    # Transform lessons to LessonSummary format
+    lesson_summaries = []
+    for lesson in lessons:
+        lesson_summary = LessonSummary(
+            id=lesson.id,
+            title=lesson.title,
+            order=lesson.order,
+            duration=30,  # Default duration
+            lesson_type="content",  # Default type
+            is_locked=False,  # Default unlocked
+            description="",  # Default empty description
+            exercise_count=0  # TODO: Count exercises when exercise model is available
+        )
+        lesson_summaries.append(lesson_summary)
+    
+    # Create detailed response
+    module_detail = ModuleDetailResponse(
+        id=module.id,
+        title=module.title,
+        order=module.order,
+        created_at=module.created_at,
+        lesson_count=len(lessons),
+        exercise_count=0,  # TODO: Calculate total exercises
+        learning_objectives=[],  # TODO: Add when module model has this field
+        prerequisites=[],  # TODO: Add when module model has this field
+        lessons=lesson_summaries,
+        updated_at=None  # TODO: Add when module model has this field
+    )
+    
+    return module_detail
 
 
 @router.post("/", response_model=ModuleResponse, status_code=status.HTTP_201_CREATED)
