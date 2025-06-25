@@ -21,6 +21,8 @@ class Settings(BaseSettings):
     @classmethod
     def assemble_cors_origins(cls, v: Union[str, List[str]]) -> List[str]:
         if isinstance(v, str):
+            if not v.strip():  # Handle empty string
+                return []
             if v.startswith("[") and v.endswith("]"):
                 # Handle JSON-like format
                 try:
@@ -28,13 +30,13 @@ class Settings(BaseSettings):
                     return json.loads(v)
                 except json.JSONDecodeError:
                     # Fallback to comma-separated
-                    return [i.strip() for i in v.strip("[]").split(",")]
+                    return [i.strip() for i in v.strip("[]").split(",") if i.strip()]
             else:
                 # Handle comma-separated format
-                return [i.strip() for i in v.split(",")]
+                return [i.strip() for i in v.split(",") if i.strip()]
         elif isinstance(v, list):
             return v
-        return [str(v)]
+        return [str(v)] if v else []
 
     # Database
     DATABASE_URL: str = "sqlite:///./grammar_anatomy.db"
