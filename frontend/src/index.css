@@ -1,3 +1,50 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom utilities for module navigation */
+@layer utilities {
+  .scale-98 {
+    transform: scale(0.98);
+  }
+  
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* Component-specific styles */
+@layer components {
+  .module-card {
+    @apply bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out cursor-pointer;
+  }
+  
+  .module-card:hover {
+    @apply border-blue-300 dark:border-blue-600 transform -translate-y-1;
+  }
+  
+  .module-card:active {
+    @apply translate-y-0 scale-98;
+  }
+  
+  .module-card:focus-within {
+    @apply ring-2 ring-blue-500 ring-offset-2;
+  }
+}
+
+/* Dark mode color adjustments */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --tw-bg-opacity: 1;
+  }
+}

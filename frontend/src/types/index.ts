@@ -11,7 +11,52 @@ export interface Module {
   id: string;
   title: string;
   order: number;
-  status?: 'not_started' | 'in_progress' | 'completed';
+  lesson_count: number;
+  created_at: string;
+  description?: string;
+  difficulty_level?: 'beginner' | 'intermediate' | 'advanced';
+  estimated_duration?: number; // minutes
+}
+
+export interface ModuleProgressDetail {
+  module_id: string;
+  total_lessons: number;
+  completed_lessons: number;
+  progress_percentage: number;
+  status: 'not_started' | 'in_progress' | 'completed';
+  last_accessed?: string;
+  estimated_completion_time?: number;
+}
+
+export interface ModuleWithProgress extends Module {
+  progress: ModuleProgressDetail;
+}
+
+export interface ModuleFilters {
+  search: string;
+  status: 'all' | 'not_started' | 'in_progress' | 'completed';
+  difficulty?: 'all' | 'beginner' | 'intermediate' | 'advanced';
+  sortBy: 'order' | 'title' | 'progress' | 'last_accessed';
+  sortDirection: 'asc' | 'desc';
+}
+
+export interface ModulesListState {
+  modules: Module[];
+  modulesWithProgress: ModuleWithProgress[];
+  filters: ModuleFilters;
+  isLoading: boolean;
+  error: string | null;
+  searchQuery: string;
+  totalCount: number;
+}
+
+export interface ModuleSearchParams {
+  search?: string;
+  status?: 'all' | 'not_started' | 'in_progress' | 'completed';
+  sortBy?: 'order' | 'title' | 'progress' | 'last_accessed';
+  sortDirection?: 'asc' | 'desc';
+  skip?: number;
+  limit?: number;
 }
 
 // Lesson types
@@ -135,8 +180,8 @@ export interface Achievement {
   earnedAt: Date;
 }
 
-// Dashboard-specific types
-export interface ModuleProgressDetail {
+// Dashboard-specific types  
+export interface DashboardModuleProgress {
   module_id: string;
   module_title: string;
   total_lessons: number;
@@ -153,7 +198,7 @@ export interface UserProgressSummary {
   total_exercises: number;
   completed_exercises: number;
   overall_progress_percentage: number;
-  module_progress: ModuleProgressDetail[];
+  module_progress: DashboardModuleProgress[];
 }
 
 export interface DashboardData {

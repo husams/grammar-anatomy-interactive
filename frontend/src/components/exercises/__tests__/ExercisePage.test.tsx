@@ -21,10 +21,10 @@ Object.defineProperty(window, 'localStorage', {
 // Mock navigate
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+  MemoryRouter: ({ children }: any) => <div>{children}</div>,
   useNavigate: () => mockNavigate,
   useParams: () => ({ exerciseId: 'test-exercise-id' }),
-}));
+}), { virtual: true });
 
 const mockExercise: Exercise = {
   id: 'test-exercise-id',
