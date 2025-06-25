@@ -19,14 +19,18 @@ import frontmatter
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from app.core.config import settings
-from app.models.module import Module
-from app.models.lesson import Lesson
-from app.models.exercise import Exercise
-from app.db.base import Base
+
+# Import Base first to avoid circular imports
+from app.db.base import Base, get_db
 
 
 def create_database_session():
-    """Create database session."""
+    """Create database session.""" 
+    # Import models here to avoid circular imports
+    from app.models.module import Module
+    from app.models.lesson import Lesson
+    from app.models.exercise import Exercise
+    
     engine = create_engine(settings.DATABASE_URL)
     Base.metadata.create_all(bind=engine)
     SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
@@ -61,6 +65,10 @@ def load_exercises(exercises_file_path):
 
 def populate_modules_and_lessons(db):
     """Populate database with modules and lessons from content directory."""
+    # Import models here to avoid circular imports
+    from app.models.module import Module
+    from app.models.lesson import Lesson
+    from app.models.exercise import Exercise
     
     # Get the content directory path
     content_dir = Path(__file__).parent.parent / "content" / "modules"
@@ -165,6 +173,9 @@ def populate_modules_and_lessons(db):
 
 def create_additional_modules(db):
     """Create additional empty modules for testing the module list."""
+    # Import models here to avoid circular imports
+    from app.models.module import Module
+    from app.models.lesson import Lesson
     
     additional_modules = [
         {"title": "Adjectives: Describing Words", "order": 3},
@@ -208,6 +219,10 @@ def create_additional_modules(db):
 
 def verify_population(db):
     """Verify that the data was populated correctly."""
+    # Import models here to avoid circular imports
+    from app.models.module import Module
+    from app.models.lesson import Lesson
+    from app.models.exercise import Exercise
     
     print(f"\n📊 Database Population Summary:")
     print(f"=" * 40)

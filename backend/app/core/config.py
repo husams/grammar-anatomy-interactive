@@ -19,12 +19,22 @@ class Settings(BaseSettings):
 
     @field_validator("BACKEND_CORS_ORIGINS", mode="before")
     @classmethod
-    def assemble_cors_origins(cls, v: Union[str, List[str]]) -> Union[List[str], str]:
-        if isinstance(v, str) and not v.startswith("["):
-            return [i.strip() for i in v.split(",")]
-        elif isinstance(v, (list, str)):
+    def assemble_cors_origins(cls, v: Union[str, List[str]]) -> List[str]:
+        if isinstance(v, str):
+            if v.startswith("[") and v.endswith("]"):
+                # Handle JSON-like format
+                try:
+                    import json
+                    return json.loads(v)
+                except json.JSONDecodeError:
+                    # Fallback to comma-separated
+                    return [i.strip() for i in v.strip("[]").split(",")]
+            else:
+                # Handle comma-separated format
+                return [i.strip() for i in v.split(",")]
+        elif isinstance(v, list):
             return v
-        raise ValueError(v)
+        return [str(v)]
 
     # Database
     DATABASE_URL: str = "sqlite:///./grammar_anatomy.db"
