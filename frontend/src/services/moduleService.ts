@@ -131,8 +131,16 @@ export class ModuleService {
    * Gets authentication token from storage
    */
   private static getAuthToken(): string {
-    const token = localStorage.getItem('access_token') || sessionStorage.getItem('access_token');
+    // Try multiple possible token keys for backward compatibility
+    const token = localStorage.getItem('grammar_anatomy_token') || 
+                  localStorage.getItem('access_token') ||
+                  localStorage.getItem('authToken') ||
+                  sessionStorage.getItem('access_token') ||
+                  sessionStorage.getItem('grammar_anatomy_token');
+    
     if (!token) {
+      console.warn('No authentication token found in storage. Available keys:', 
+        Object.keys(localStorage).filter(key => key.includes('token') || key.includes('auth')));
       throw new Error('No authentication token found');
     }
     return token;
