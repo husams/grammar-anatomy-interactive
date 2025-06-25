@@ -1,7 +1,7 @@
 # Grammar Anatomy Application Makefile
 # Provides convenient commands for managing the Docker-based application
 
-.PHONY: help start stop restart status logs build clean dev prod test migrate shell-backend shell-frontend shell-db
+.PHONY: help start stop restart status logs build clean dev prod test migrate populate shell-backend shell-frontend shell-db
 
 # Default target
 .DEFAULT_GOAL := help
@@ -45,6 +45,9 @@ test: ## Run all tests
 
 migrate: ## Run database migrations
 	@docker-compose exec backend alembic upgrade head
+
+populate: ## Populate database with sample data
+	@docker-compose exec backend python populate_db.py
 
 shell-backend: ## Open backend container shell
 	@docker-compose exec backend bash

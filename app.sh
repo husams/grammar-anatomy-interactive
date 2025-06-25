@@ -69,6 +69,10 @@ case "${1:-start}" in
         print_info "Running database migrations..."
         docker-compose exec backend alembic upgrade head
         ;;
+    "populate")
+        print_info "Populating database with sample data..."
+        docker-compose exec backend python populate_db.py
+        ;;
     "test")
         print_info "Running tests..."
         docker-compose exec backend pytest
@@ -93,6 +97,7 @@ case "${1:-start}" in
         echo "  shell-frontend Open frontend container shell"
         echo "  shell-db       Open database shell"
         echo "  migrate        Run database migrations"
+        echo "  populate       Populate database with sample data"
         echo "  test           Run all tests"
         echo "  help           Show this help"
         echo ""

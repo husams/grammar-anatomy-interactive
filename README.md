@@ -23,6 +23,14 @@ make start
 - Backend API: http://localhost:8000
 - API Documentation: http://localhost:8000/docs
 
+**Populate with sample data:**
+```bash
+# After starting the application, populate the database
+./app.sh populate
+# Or using make
+make populate
+```
+
 ### Option 2: Manual Development Setup
 
 **Prerequisites:**
@@ -44,6 +52,12 @@ python run.py
 cd frontend
 npm install
 npm start
+```
+
+**Populate Database (Manual Setup):**
+```bash
+# Run the population script
+./populate-db.sh
 ```
 
 ## How to Run Unit Tests
