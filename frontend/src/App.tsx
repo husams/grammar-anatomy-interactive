@@ -10,9 +10,9 @@ import PasswordResetPage from './pages/PasswordResetPage';
 import DashboardPage from './pages/DashboardPage';
 import ModulesListPage from './pages/ModulesListPage';
 import ModuleDetailPage from './pages/ModuleDetailPage';
+import LessonPage from './pages/LessonPage';
 
 // Placeholder components - will be implemented in future phases
-const Lesson = () => <div className="p-8">Lesson - Coming Soon</div>;
 const Exercise = () => <div className="p-8">Exercise - Coming Soon</div>;
 const AnatomyLab = () => <div className="p-8">Anatomy Lab - Coming Soon</div>;
 const AIGuru = () => <div className="p-8">AI Guru - Coming Soon</div>;
@@ -63,7 +63,7 @@ const AppContent: React.FC = () => {
           } />
           <Route path="/lessons/:id" element={
             <ProtectedRoute>
-              <Lesson />
+              <LessonPage />
             </ProtectedRoute>
           } />
           <Route path="/exercises/:id" element={
