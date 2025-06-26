@@ -3,6 +3,11 @@
 ## Description
 Allows new users to register for an account using their email, name, and password. This includes comprehensive frontend validation, secure backend processing, password hashing, automatic login, and robust error handling.
 
+## Visual Reference
+![Registration Screen](../screenshots/public/register-dark.png)
+
+*Screenshot showing the registration form with name, email, password, and confirm password fields*
+
 ## Actors/Roles
 - **New User** (potential student registering for the first time)
 - **System** (backend validation and user creation)

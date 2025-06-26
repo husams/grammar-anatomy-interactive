@@ -3,6 +3,11 @@
 ## Description
 The module navigation system provides a comprehensive interface for users to browse, filter, and access all available grammar learning modules. It includes visual progress tracking, intuitive navigation patterns, search capabilities, and responsive design optimized for all devices. The system integrates real-time progress data, user preferences, and adaptive learning recommendations to create a personalized learning experience.
 
+## Visual Reference
+![Modules List](../screenshots/authenticated/modules-list-dark.png)
+
+*Screenshot showing the modules list with search functionality, filtering options, and progress tracking*
+
 ## Actors/Roles
 - **Student**: Primary user browsing and accessing modules for learning
 - **Teacher**: Secondary user monitoring student progress and assigning modules (future implementation)

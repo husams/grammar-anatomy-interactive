@@ -3,6 +3,11 @@
 ## Description
 Handles user login and password reset to provide secure access to the app. This includes JWT-based authentication, secure password hashing, and comprehensive error handling.
 
+## Visual Reference
+![Login Screen](../screenshots/public/login-dark.png)
+
+*Screenshot showing the login interface with email/password form, navigation links, and dark mode toggle*
+
 ## Actors/Roles
 - Student (authenticated user)
 - Anonymous User (unauthenticated visitor)

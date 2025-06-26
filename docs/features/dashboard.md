@@ -3,6 +3,11 @@
 ## Description
 The dashboard serves as the central hub for users, providing a comprehensive overview of their learning journey. It displays progress tracking, available modules, achievements, skill summaries, learning analytics, and quick actions to continue their grammar learning experience.
 
+## Visual Reference
+![User Dashboard](../screenshots/authenticated/dashboard-dark.png)
+
+*Screenshot showing the user dashboard with progress overview, quick actions, and learning analytics*
+
 ## Actors/Roles
 - **Student**: Primary user accessing their personal dashboard
 - **Teacher**: Secondary user viewing class-wide progress (future implementation)

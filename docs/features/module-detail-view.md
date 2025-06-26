@@ -3,6 +3,11 @@
 ## Description
 The module detail view provides users with comprehensive information about a specific grammar module, including lessons overview, progress tracking, learning objectives, and navigation to individual lessons and exercises. It serves as the central hub for users to understand module content, track their progress, and access specific learning materials.
 
+## Visual Reference
+![Module Detail Page](../screenshots/authenticated/module-detail-dark.png)
+
+*Screenshot showing the module detail view with lessons list, progress overview, and quick actions*
+
 ## Actors/Roles
 - **Student**: Primary user viewing module details and accessing lessons
 - **Teacher**: Secondary user reviewing module content and student progress (future)
