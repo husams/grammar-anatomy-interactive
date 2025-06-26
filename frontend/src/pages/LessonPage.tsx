@@ -20,6 +20,25 @@ const LessonPage: React.FC = () => {
     navigationInfo: null,
   });
 
+  // Handle lesson completion
+  const handleCompleteLesson = useCallback(async () => {
+    if (!id || state.isCompleted) return;
+
+    try {
+      await LessonService.updateLessonProgress(
+        id, 
+        true, 
+        state.timeSpent, 
+        state.readingProgress
+      );
+      
+      setState(prev => ({ ...prev, isCompleted: true }));
+    } catch (error) {
+      // Silently handle completion error - lesson can still be marked complete locally
+      setState(prev => ({ ...prev, isCompleted: true }));
+    }
+  }, [id, state.isCompleted, state.timeSpent, state.readingProgress]);
+
   // Track reading progress based on scroll
   const updateReadingProgress = useCallback(() => {
     if (!contentRef.current) return;
@@ -106,25 +125,6 @@ const LessonPage: React.FC = () => {
   useEffect(() => {
     fetchLessonData();
   }, [fetchLessonData]);
-
-  // Handle lesson completion
-  const handleCompleteLesson = useCallback(async () => {
-    if (!id || state.isCompleted) return;
-
-    try {
-      await LessonService.updateLessonProgress(
-        id, 
-        true, 
-        state.timeSpent, 
-        state.readingProgress
-      );
-      
-      setState(prev => ({ ...prev, isCompleted: true }));
-    } catch (error) {
-      // Silently handle completion error - lesson can still be marked complete locally
-      setState(prev => ({ ...prev, isCompleted: true }));
-    }
-  }, [id, state.isCompleted, state.timeSpent, state.readingProgress]);
 
   // Navigation handlers
   const handlePreviousLesson = () => {
