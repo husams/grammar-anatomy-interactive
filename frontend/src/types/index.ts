@@ -138,10 +138,29 @@ export interface ModuleSearchParams {
 // Lesson types
 export interface Lesson {
   id: string;
-  moduleId: string;
+  module_id: string;
   title: string;
   content: string;
   order: number;
+  created_at: string;
+  exercise_count?: number;
+}
+
+export interface LessonNavigation {
+  previousLessonId: string | null;
+  nextLessonId: string | null;
+  moduleId: string;
+  moduleTitle: string;
+}
+
+export interface LessonState {
+  lesson: Lesson | null;
+  isLoading: boolean;
+  error: string | null;
+  readingProgress: number; // 0-100%
+  timeSpent: number; // minutes
+  isCompleted: boolean;
+  navigationInfo: LessonNavigation | null;
 }
 
 // Exercise types (comprehensive implementation)
