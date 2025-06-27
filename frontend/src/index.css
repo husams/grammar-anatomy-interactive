@@ -2,7 +2,140 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom utilities for module navigation */
+/* Modern Educational Theme System */
+:root {
+  /* Primary Brand Colors */
+  --color-primary-50: #f0f9ff;
+  --color-primary-100: #e0f2fe;
+  --color-primary-200: #bae6fd;
+  --color-primary-300: #7dd3fc;
+  --color-primary-400: #38bdf8;
+  --color-primary-500: #0ea5e9;
+  --color-primary-600: #0284c7;
+  --color-primary-700: #0369a1;
+  --color-primary-800: #075985;
+  --color-primary-900: #0c4a6e;
+  
+  /* Grammar Element Colors - Intuitive Color Coding */
+  --color-noun: #3b82f6;           /* Blue - solid, foundational */
+  --color-noun-bg: #eff6ff;
+  --color-noun-hover: #1d4ed8;
+  
+  --color-verb: #10b981;           /* Green - action, movement */
+  --color-verb-bg: #ecfdf5;
+  --color-verb-hover: #059669;
+  
+  --color-adjective: #8b5cf6;      /* Purple - descriptive, qualitative */
+  --color-adjective-bg: #f3e8ff;
+  --color-adjective-hover: #7c3aed;
+  
+  --color-pronoun: #f59e0b;        /* Orange - replacement, reference */
+  --color-pronoun-bg: #fffbeb;
+  --color-pronoun-hover: #d97706;
+  
+  --color-preposition: #ef4444;    /* Red - relationships, connections */
+  --color-preposition-bg: #fef2f2;
+  --color-preposition-hover: #dc2626;
+  
+  --color-adverb: #06b6d4;         /* Cyan - modifies actions */
+  --color-adverb-bg: #ecfeff;
+  --color-adverb-hover: #0891b2;
+  
+  --color-example: #16a34a;        /* Green for examples */
+  --color-example-bg: #f0fdf4;
+  --color-definition: #7c2d12;     /* Brown for definitions */
+  --color-definition-bg: #fef7ed;
+  
+  /* Modern Typography Scale - Optimized for Educational Content */
+  --font-size-xs: 0.75rem;        /* 12px - captions, small labels */
+  --font-size-sm: 0.875rem;       /* 14px - secondary text, metadata */
+  --font-size-base: 1rem;         /* 16px - body text, primary reading */
+  --font-size-lg: 1.125rem;       /* 18px - large body text, emphasis */
+  --font-size-xl: 1.25rem;        /* 20px - subheadings, callouts */
+  --font-size-2xl: 1.5rem;        /* 24px - section headings */
+  --font-size-3xl: 1.875rem;      /* 30px - page headings */
+  --font-size-4xl: 2.25rem;       /* 36px - major headings */
+  --font-size-5xl: 3rem;          /* 48px - hero titles */
+  --font-size-6xl: 3.75rem;       /* 60px - display titles */
+  
+  /* Typography Weights - Semantic Names */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  
+  /* Line Heights - Optimized for Reading */
+  --line-height-tight: 1.25;      /* For headings */
+  --line-height-snug: 1.375;      /* For subheadings */
+  --line-height-normal: 1.5;      /* For body text */
+  --line-height-relaxed: 1.625;   /* For easy reading */
+  --line-height-loose: 2;         /* For very comfortable reading */
+  
+  /* Letter Spacing */
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
+  
+  /* Content Colors - Light Theme */
+  --color-text-primary: #1f2937;
+  --color-text-secondary: #6b7280;
+  --color-text-muted: #9ca3af;
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f9fafb;
+  --color-bg-accent: #f3f4f6;
+  --color-border: #e5e7eb;
+  --color-border-hover: #d1d5db;
+  
+  /* Modern Spacing System */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+  
+  /* Enhanced Shadow System */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-interactive: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  
+  /* Border Radius System */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+}
+
+/* Optional Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-text-primary: #f9fafb;
+    --color-text-secondary: #d1d5db;
+    --color-text-muted: #9ca3af;
+    --color-bg-primary: #111827;
+    --color-bg-secondary: #1f2937;
+    --color-bg-accent: #374151;
+    --color-border: #374151;
+    --color-border-hover: #4b5563;
+    
+    /* Adjust grammar colors for dark mode */
+    --color-noun-bg: #1e3a8a;
+    --color-verb-bg: #064e3b;
+    --color-adjective-bg: #581c87;
+    --color-pronoun-bg: #78350f;
+    --color-preposition-bg: #7f1d1d;
+    --color-adverb-bg: #0e7490;
+  }
+}
+
+/* Custom utilities */
 @layer utilities {
   .scale-98 {
     transform: scale(0.98);
@@ -21,9 +154,22 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+  
+  /* Lesson-specific utilities */
+  .lesson-gradient-bg {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+  
+  .lesson-content-spacing > * + * {
+    margin-top: var(--spacing-content);
+  }
+  
+  .lesson-section-spacing > * + * {
+    margin-top: var(--spacing-section);
+  }
 }
 
-/* Component-specific styles */
+/* Enhanced Component Styles */
 @layer components {
   .module-card {
     @apply bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out cursor-pointer;
@@ -40,11 +186,544 @@
   .module-card:focus-within {
     @apply ring-2 ring-blue-500 ring-offset-2;
   }
-}
+  
+  /* Modern Lesson Layout */
+  .lesson-container {
+    @apply max-w-5xl mx-auto px-4 sm:px-6 lg:px-8;
+    background: var(--color-bg-secondary);
+    min-height: 100vh;
+  }
+  
+  .lesson-header {
+    @apply text-center py-16 mb-12;
+    background: linear-gradient(135deg, var(--color-primary-500), var(--color-primary-700));
+    color: white;
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-xl);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .lesson-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  
+  .lesson-content-card {
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    margin-bottom: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+  
+  .lesson-content-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+    border-color: var(--color-border-hover);
+  }
+  
+  /* Modern Grammar Elements */
+  .grammar-noun {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    margin: 0.125rem;
+    background: var(--color-noun-bg);
+    color: var(--color-noun);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-noun);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+  
+  .grammar-noun:hover {
+    background: var(--color-noun);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .grammar-verb {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    margin: 0.125rem;
+    background: var(--color-verb-bg);
+    color: var(--color-verb);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-verb);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .grammar-verb:hover {
+    background: var(--color-verb);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .grammar-adjective {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    margin: 0.125rem;
+    background: var(--color-adjective-bg);
+    color: var(--color-adjective);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-adjective);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .grammar-adjective:hover {
+    background: var(--color-adjective);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .grammar-pronoun {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    margin: 0.125rem;
+    background: var(--color-pronoun-bg);
+    color: var(--color-pronoun);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-pronoun);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .grammar-pronoun:hover {
+    background: var(--color-pronoun);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .grammar-example {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    margin: 0.125rem;
+    background: var(--color-example-bg);
+    color: var(--color-example);
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--color-example);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+  
+  .grammar-example:hover {
+    background: var(--color-example);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .grammar-example::after {
+    content: '💡';
+    position: absolute;
+    top: -0.5rem;
+    right: -0.5rem;
+    font-size: 0.75rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  
+  .grammar-example:hover::after {
+    opacity: 1;
+  }
+  
+  /* Modern Progress System */
+  .progress-bar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--color-bg-accent);
+    z-index: 50;
+    border-bottom: 1px solid var(--color-border);
+  }
+  
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-primary-500), var(--color-primary-600));
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shimmer 2s infinite;
+  }
+  
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  
+  .floating-progress {
+    position: fixed;
+    bottom: var(--spacing-xl);
+    right: var(--spacing-xl);
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-xl);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 40;
+  }
+  
+  .floating-progress:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--color-primary-300);
+  }
+  
+  /* Modern Navigation */
+  .nav-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: linear-gradient(135deg, var(--color-primary-500), var(--color-primary-600));
+    color: white;
+    border: none;
+    border-radius: var(--radius-lg);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .nav-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
+  
+  .nav-button:hover::before {
+    left: 100%;
+  }
+  
+  .nav-button:hover {
+    background: linear-gradient(135deg, var(--color-primary-600), var(--color-primary-700));
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .nav-button:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .nav-button-secondary {
+    background: var(--color-bg-primary);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+  }
+  
+  .nav-button-secondary:hover {
+    background: var(--color-bg-accent);
+    color: var(--color-text-primary);
+    border-color: var(--color-border-hover);
+  }
+  
+  /* Modern Content Sections */
+  .content-section {
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+    transition: all 0.2s ease;
+  }
+  
+  .content-section.introduction {
+    border-left: 4px solid var(--color-primary-500);
+    background: linear-gradient(to right, var(--color-primary-50), var(--color-bg-primary));
+  }
+  
+  .content-section.examples {
+    border-left: 4px solid var(--color-example);
+    background: linear-gradient(to right, var(--color-example-bg), var(--color-bg-primary));
+  }
+  
+  .content-section.explanation {
+    border-left: 4px solid var(--color-adjective);
+    background: linear-gradient(to right, var(--color-adjective-bg), var(--color-bg-primary));
+  }
+  
+  .content-section.practice {
+    border-left: 4px solid var(--color-pronoun);
+    background: linear-gradient(to right, var(--color-pronoun-bg), var(--color-bg-primary));
+  }
+  
+  /* Modern Typography System */
+  .lesson-title {
+    font-size: var(--font-size-5xl);
+    font-weight: var(--font-weight-extrabold);
+    line-height: var(--line-height-tight);
+    margin-bottom: var(--spacing-lg);
+    background: linear-gradient(135deg, var(--color-primary-600), var(--color-primary-700));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: var(--letter-spacing-tight);
+  }
+  
+  .lesson-subtitle {
+    font-size: var(--font-size-xl);
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-snug);
+    letter-spacing: var(--letter-spacing-normal);
+  }
+  
+  .section-heading {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 3px solid var(--color-primary-500);
+    transition: all 0.2s ease;
+    position: relative;
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-normal);
+  }
+  
+  .section-heading::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: var(--color-primary-600);
+    transition: width 0.3s ease;
+  }
+  
+  .section-heading:hover::after {
+    width: 100%;
+  }
+  
+  .subsection-heading {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-md);
+    transition: color 0.2s ease;
+    line-height: var(--line-height-snug);
+    letter-spacing: var(--letter-spacing-normal);
+  }
+  
+  .subsection-heading:hover {
+    color: var(--color-primary-600);
+  }
+  
+  /* Additional Typography Utilities */
+  .display-heading {
+    font-size: var(--font-size-6xl);
+    font-weight: var(--font-weight-extrabold);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+    color: var(--color-text-primary);
+  }
+  
+  .page-heading {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+    color: var(--color-text-primary);
+  }
+  
+  .content-heading {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-snug);
+    letter-spacing: var(--letter-spacing-normal);
+    color: var(--color-text-primary);
+  }
+  
+  /* Enhanced Text Elements */
+  .lesson-text {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-lg);
+    font-weight: var(--font-weight-normal);
+    letter-spacing: var(--letter-spacing-normal);
+  }
+  
+  .lesson-text-secondary {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-normal);
+    font-weight: var(--font-weight-normal);
+  }
 
-/* Dark mode color adjustments */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --tw-bg-opacity: 1;
+  .lesson-text-large {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-normal);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .lesson-text-small {
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-normal);
+    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-normal);
+  }
+
+  .lesson-text-caption {
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-normal);
+    color: var(--color-text-muted);
+    font-weight: var(--font-weight-medium);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+  }
+  
+  /* Micro-interactions */
+  .interactive-element {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .interactive-element:hover {
+    transform: translateY(-1px);
+  }
+  
+  .interactive-element:active {
+    transform: translateY(0);
+  }
+  
+  /* Enhanced List Styling */
+  .enhanced-list li {
+    transition: all 0.2s ease;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+  }
+  
+  .enhanced-list li:hover {
+    background-color: var(--color-primary-50);
+    transform: translateX(0.5rem);
+    box-shadow: var(--shadow-interactive);
+  }
+  
+  /* Responsive Typography */
+  @media (max-width: 768px) {
+    .lesson-title {
+      @apply text-3xl;
+    }
+    
+    .lesson-subtitle {
+      @apply text-lg;
+    }
+    
+    .section-heading {
+      @apply text-xl;
+    }
+    
+    .subsection-heading {
+      @apply text-lg;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .lesson-title {
+      @apply text-2xl;
+    }
+    
+    .lesson-subtitle {
+      @apply text-base;
+    }
+  }
+  
+  /* Mobile-first responsive design */
+  .lesson-container {
+    @apply px-4;
+  }
+  
+  @media (min-width: 640px) {
+    .lesson-container {
+      @apply px-6;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .lesson-container {
+      @apply px-8;
+    }
+  }
+  
+  /* Mobile navigation adjustments */
+  @media (max-width: 768px) {
+    .nav-button {
+      @apply px-4 py-2 text-sm;
+    }
+    
+    .floating-progress {
+      @apply bottom-4 right-4 p-3;
+    }
+    
+    .lesson-header {
+      @apply py-8;
+    }
+    
+    .lesson-content-card {
+      @apply p-4;
+    }
+  }
+  
+  /* Touch-friendly interactions */
+  @media (hover: none) and (pointer: coarse) {
+    .grammar-example,
+    .grammar-term {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+    }
+    
+    .nav-button {
+      min-height: 44px;
+    }
   }
 }

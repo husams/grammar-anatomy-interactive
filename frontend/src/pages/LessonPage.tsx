@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { LessonState } from '../types';
-import ReactMarkdown from 'react-markdown';
+import InteractiveMarkdown from '../components/InteractiveMarkdown';
 import LessonService from '../services/lessonService';
 
 const LessonPage: React.FC = () => {
@@ -229,16 +229,30 @@ const LessonPage: React.FC = () => {
   const estimatedReadingTime = LessonService.calculateReadingTime(lesson.content);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      {/* Reading Progress Bar */}
-      <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 dark:bg-gray-700 z-50">
+    <div className="min-h-screen lesson-container">
+      {/* Enhanced Reading Progress Bar */}
+      <div className="progress-bar-container">
         <div 
-          className="h-full bg-blue-500 transition-all duration-300 ease-out"
+          className="progress-bar"
           style={{ width: `${state.readingProgress}%` }}
         />
       </div>
 
-      <div className="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+      {/* Floating Progress Indicator */}
+      {state.readingProgress > 0 && (
+        <div className="floating-progress">
+          <div className="text-center">
+            <div className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              {Math.round(state.readingProgress)}%
+            </div>
+            <div className="text-xs text-gray-500 dark:text-gray-400">
+              Complete
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="max-w-5xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb Navigation */}
         <nav className="mb-6" aria-label="Breadcrumb">
           <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
@@ -266,115 +280,154 @@ const LessonPage: React.FC = () => {
           </div>
         </nav>
 
-        {/* Lesson Header */}
-        <header className="mb-8">
-          <div className="flex items-start justify-between mb-4">
-            <div className="flex-1">
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-                {lesson.title}
-              </h1>
-              <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400">
-                <span>Lesson {lesson.order}</span>
-                <span>•</span>
+        {/* Enhanced Lesson Header */}
+        <header className="lesson-header mb-12">
+          <div className="text-center">
+            <h1 className="lesson-title text-5xl font-bold mb-4 text-white">
+              {lesson.title}
+            </h1>
+            <div className="lesson-subtitle mb-6 text-blue-100">
+              Master the fundamentals of grammar construction
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-sm text-blue-100">
+              <div className="flex items-center space-x-2">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.414-1.414L11 9.586V6z" clipRule="evenodd" />
+                </svg>
                 <span>{estimatedReadingTime} min read</span>
-                {lesson.exercise_count && lesson.exercise_count > 0 && (
-                  <>
-                    <span>•</span>
-                    <span>{lesson.exercise_count} exercises</span>
-                  </>
-                )}
-                {state.isCompleted && (
-                  <>
-                    <span>•</span>
-                    <span className="text-green-600 dark:text-green-400 font-medium">
-                      ✓ Completed
-                    </span>
-                  </>
-                )}
               </div>
+              <div className="flex items-center space-x-2">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Lesson {lesson.order}</span>
+              </div>
+              {lesson.exercise_count && lesson.exercise_count > 0 && (
+                <div className="flex items-center space-x-2">
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+                    <path fillRule="evenodd" d="M4 5a2 2 0 012-2v1a1 1 0 001 1h6a1 1 0 001-1V3a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
+                  </svg>
+                  <span>{lesson.exercise_count} exercises</span>
+                </div>
+              )}
+              {state.isCompleted && (
+                <div className="flex items-center space-x-2 bg-green-500 bg-opacity-20 px-3 py-1 rounded-full">
+                  <svg className="w-4 h-4 text-green-300" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-green-300 font-medium">Completed</span>
+                </div>
+              )}
             </div>
             
             {/* Complete Lesson Button */}
             {!state.isCompleted && state.readingProgress > 50 && (
-              <button
-                onClick={handleCompleteLesson}
-                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md transition-colors"
-              >
-                Mark Complete
-              </button>
+              <div className="mt-6">
+                <button
+                  onClick={handleCompleteLesson}
+                  className="nav-button bg-green-600 hover:bg-green-700"
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  <span>Mark Complete</span>
+                </button>
+              </div>
             )}
           </div>
         </header>
 
-        {/* Lesson Content */}
+        {/* Enhanced Lesson Content */}
         <main 
           ref={contentRef}
-          className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-8 mb-8"
+          className="lesson-content-card"
         >
-          <div className="prose prose-lg max-w-none dark:prose-invert 
-                         prose-headings:text-gray-900 dark:prose-headings:text-gray-100
-                         prose-p:text-gray-700 dark:prose-p:text-gray-300
-                         prose-strong:text-gray-900 dark:prose-strong:text-gray-100
-                         prose-code:text-blue-600 dark:prose-code:text-blue-400
-                         prose-pre:bg-gray-100 dark:prose-pre:bg-gray-900">
-            <ReactMarkdown>{lesson.content}</ReactMarkdown>
-          </div>
+          <InteractiveMarkdown 
+            content={lesson.content}
+            className="lesson-content-spacing"
+          />
         </main>
 
-        {/* Lesson Navigation */}
-        <nav className="flex items-center justify-between bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-          <div className="flex-1">
-            {state.navigationInfo?.previousLessonId ? (
+        {/* Enhanced Lesson Navigation */}
+        <nav className="lesson-content-card">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex-1 w-full md:w-auto">
+              {state.navigationInfo?.previousLessonId ? (
+                <button
+                  onClick={handlePreviousLesson}
+                  className="nav-button nav-button-secondary w-full md:w-auto"
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  <span>Previous</span>
+                </button>
+              ) : (
+                <div></div>
+              )}
+            </div>
+
+            <div className="flex-1 text-center w-full md:w-auto">
               <button
-                onClick={handlePreviousLesson}
-                className="flex items-center space-x-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
+                onClick={handleBackToModule}
+                className="nav-button nav-button-secondary w-full md:w-auto"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                  <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L4.414 9H17a1 1 0 110 2H4.414l5.293 5.293a1 1 0 010 1.414z" clipRule="evenodd" />
                 </svg>
-                <span>Previous Lesson</span>
+                <span>Back to Module</span>
               </button>
-            ) : (
-              <div></div>
-            )}
-          </div>
+            </div>
 
-          <div className="flex-1 text-center">
-            <button
-              onClick={handleBackToModule}
-              className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
-            >
-              Back to Module
-            </button>
-          </div>
-
-          <div className="flex-1 text-right">
-            {state.navigationInfo?.nextLessonId ? (
-              <button
-                onClick={handleNextLesson}
-                className="flex items-center space-x-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors ml-auto"
-              >
-                <span>Next Lesson</span>
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                </svg>
-              </button>
-            ) : (
-              <div></div>
-            )}
+            <div className="flex-1 text-right w-full md:w-auto">
+              {state.navigationInfo?.nextLessonId ? (
+                <button
+                  onClick={handleNextLesson}
+                  className="nav-button ml-auto w-full md:w-auto"
+                >
+                  <span>Next</span>
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                  </svg>
+                </button>
+              ) : (
+                <div></div>
+              )}
+            </div>
           </div>
         </nav>
 
-        {/* Progress Info */}
-        <div className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
+        {/* Enhanced Progress Info */}
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="lesson-content-card text-center">
+            <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+              {Math.round(state.readingProgress)}%
+            </div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">
+              Progress
+            </div>
+          </div>
+          
           {state.timeSpent > 0 && (
-            <span>Time spent: {Math.round(state.timeSpent)} minutes</span>
+            <div className="lesson-content-card text-center">
+              <div className="text-2xl font-bold text-green-600 dark:text-green-400">
+                {Math.round(state.timeSpent)}
+              </div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">
+                Minutes
+              </div>
+            </div>
           )}
-          {state.readingProgress > 0 && (
-            <span className="ml-4">
-              Progress: {Math.round(state.readingProgress)}%
-            </span>
-          )}
+          
+          <div className="lesson-content-card text-center">
+            <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+              {lesson.exercise_count || 0}
+            </div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">
+              Exercises
+            </div>
+          </div>
         </div>
       </div>
     </div>
