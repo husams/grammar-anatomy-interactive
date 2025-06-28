@@ -30,7 +30,7 @@ export class ModuleService {
       queryParams.limit = params.limit.toString();
     }
 
-    const response = await ApiClient.get<Module[] | { data: Module[]; total: number }>('/modules', queryParams);
+    const response = await ApiClient.get<Module[] | { data: Module[]; total: number }>('/modules/', queryParams);
     const result = response.data;
     
     // Handle both array response and paginated response formats
@@ -82,7 +82,7 @@ export class ModuleService {
     }
 
     const searchParams = new URLSearchParams({ search: query });
-    const response = await ApiClient.request<Module[] | { data: Module[] }>(`/modules?${searchParams.toString()}`, {
+    const response = await ApiClient.request<Module[] | { data: Module[] }>(`/modules/?${searchParams.toString()}`, {
       method: 'GET',
       signal: abortSignal,
     });

@@ -44,10 +44,19 @@ async def get_lessons(
     # Add exercise count to each lesson
     result = []
     for lesson in lessons:
-        exercise_count = db.query(Exercise).filter(Exercise.lesson_id == lesson.id).count()
-        lesson_dict = LessonResponse.model_validate(lesson)
-        lesson_dict.exercise_count = exercise_count
-        result.append(lesson_dict)
+        # Simple count without accessing specific columns
+        from sqlalchemy import func
+        exercise_count = db.query(func.count(Exercise.id)).filter(Exercise.lesson_id == lesson.id).scalar()
+        lesson_dict = {
+            "id": lesson.id,
+            "module_id": lesson.module_id,
+            "title": lesson.title,
+            "content": lesson.content,
+            "order": lesson.order,
+            "created_at": lesson.created_at,
+            "exercise_count": exercise_count or 0
+        }
+        result.append(LessonResponse(**lesson_dict))
     
     return result
 
@@ -75,11 +84,26 @@ async def get_lesson(
         )
     
     # Add exercise count
-    exercise_count = db.query(Exercise).filter(Exercise.lesson_id == lesson.id).count()
-    lesson_dict = LessonResponse.model_validate(lesson)
-    lesson_dict.exercise_count = exercise_count
-    
-    return lesson_dict
+    try:
+        from sqlalchemy import func
+        exercise_count = db.query(func.count(Exercise.id)).filter(Exercise.lesson_id == lesson.id).scalar()
+        lesson_dict = {
+            "id": lesson.id,
+            "module_id": lesson.module_id,
+            "title": lesson.title,
+            "content": lesson.content,
+            "order": lesson.order,
+            "created_at": lesson.created_at,
+            "exercise_count": exercise_count or 0
+        }
+        
+        return LessonResponse(**lesson_dict)
+    except Exception as e:
+        print(f"Error creating lesson response: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error processing lesson: {str(e)}"
+        )
 
 
 @router.post("/", response_model=LessonResponse, status_code=status.HTTP_201_CREATED)

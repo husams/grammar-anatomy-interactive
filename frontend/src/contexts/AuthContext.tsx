@@ -67,7 +67,13 @@ const tokenStorage = {
 
 // API utilities
 const apiCall = async (endpoint: string, options: RequestInit = {}) => {
-  const baseUrl = process.env.NODE_ENV === 'production' ? '/api/v1' : 'http://localhost:8000/api/v1';
+  const baseUrl = process.env.REACT_APP_API_URL 
+    ? (process.env.REACT_APP_API_URL.endsWith('/api/v1') 
+        ? process.env.REACT_APP_API_URL 
+        : `${process.env.REACT_APP_API_URL}/api/v1`)
+    : (process.env.NODE_ENV === 'production' 
+        ? '/api/v1' 
+        : 'http://localhost:8000/api/v1');
   const url = `${baseUrl}${endpoint}`;
   console.log('🔥 Making API call to:', url);
   console.log('🔥 Options:', JSON.stringify(options, null, 2));

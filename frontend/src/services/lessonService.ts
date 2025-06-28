@@ -23,7 +23,7 @@ export class LessonService {
    */
   static async getLessonsByModule(moduleId: string): Promise<ApiResponse<Lesson[]>> {
     try {
-      const response = await ApiClient.get<Lesson[]>(`/lessons?module_id=${moduleId}`);
+      const response = await ApiClient.get<Lesson[]>(`/lessons/?module_id=${moduleId}`);
       return response;
     } catch (error) {
       throw new Error(`Failed to fetch module lessons: ${error instanceof Error ? error.message : 'Unknown error'}`);

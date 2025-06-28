@@ -17,9 +17,13 @@ export class ApiError extends Error {
 }
 
 export class ApiClient {
-  private static baseUrl = process.env.NODE_ENV === 'production' 
-    ? '/api/v1' 
-    : 'http://localhost:8000/api/v1';
+  private static baseUrl = process.env.REACT_APP_API_URL 
+    ? (process.env.REACT_APP_API_URL.endsWith('/api/v1') 
+        ? process.env.REACT_APP_API_URL 
+        : `${process.env.REACT_APP_API_URL}/api/v1`)
+    : (process.env.NODE_ENV === 'production' 
+        ? '/api/v1' 
+        : 'http://localhost:8000/api/v1');
 
   /**
    * Gets authentication token from storage

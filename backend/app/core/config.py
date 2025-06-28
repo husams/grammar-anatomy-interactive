@@ -4,39 +4,26 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    model_config = ConfigDict(case_sensitive=True, env_file=".env")
+    model_config = ConfigDict(case_sensitive=True, env_file=".env", env_ignore_empty=True, env_prefix="")
     
     API_V1_STR: str = "/api/v1"
     PROJECT_NAME: str = "Grammar Anatomy API"
     
-    # CORS
-    BACKEND_CORS_ORIGINS: List[str] = [
-        "http://localhost:3000",
-        "http://localhost:3001",
-        "http://127.0.0.1:3000",
-        "http://127.0.0.1:3001",
-    ]
+    # CORS - hardcoded to avoid environment variable issues
+    def get_cors_origins(self) -> List[str]:
+        return [
+            "http://localhost:3000",
+            "http://localhost:3001",
+            "http://localhost:3002",
+            "http://127.0.0.1:3000",
+            "http://127.0.0.1:3001", 
+            "http://127.0.0.1:3002",
+        ]
+    
+    @property
+    def BACKEND_CORS_ORIGINS(self) -> List[str]:
+        return self.get_cors_origins()
 
-    @field_validator("BACKEND_CORS_ORIGINS", mode="before")
-    @classmethod
-    def assemble_cors_origins(cls, v: Union[str, List[str]]) -> List[str]:
-        if isinstance(v, str):
-            if not v.strip():  # Handle empty string
-                return []
-            if v.startswith("[") and v.endswith("]"):
-                # Handle JSON-like format
-                try:
-                    import json
-                    return json.loads(v)
-                except json.JSONDecodeError:
-                    # Fallback to comma-separated
-                    return [i.strip() for i in v.strip("[]").split(",") if i.strip()]
-            else:
-                # Handle comma-separated format
-                return [i.strip() for i in v.split(",") if i.strip()]
-        elif isinstance(v, list):
-            return v
-        return [str(v)] if v else []
 
     # Database
     DATABASE_URL: str = "sqlite:///./grammar_anatomy.db"
